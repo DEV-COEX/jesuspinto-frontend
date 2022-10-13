@@ -1,4 +1,4 @@
-# jesuspinto-frontend
+# ecommerce
 
 ## Build Setup
 

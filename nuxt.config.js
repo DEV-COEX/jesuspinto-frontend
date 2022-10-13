@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Empaques Cárdenas - Tienda',
+    title: 'Accesorios - Jesus Pinto Sudea',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,7 +12,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Consigue sacos, de todo tipo de material, bolsas, hilos, telas, mallas y mas, todo en Empaques Cardenas.',
+          '',
       },
       { name: 'format-detection', content: 'telephone=no' },
     ],
@@ -28,7 +28,7 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/coSnfig-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
@@ -82,8 +82,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://v1-api.ecommerce.coex.com.co',
-    // baseURL: 'http://localhost:8000',
+    baseURL: 'https://v1-api.jesuspinto.co',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

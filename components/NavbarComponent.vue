@@ -101,7 +101,7 @@
             </header>
             <ul class="flex flex-col px-5 py-2">
               <li v-for="(item, i) in menu" :key="i" class="mx-3 my-2">
-                <nuxt-link class="text-blue-500 font-bold" :to="item.path"
+                <nuxt-link class="text-[#9B9E0B] font-bold" :to="item.path"
                   >{{ item.name }}
                 </nuxt-link>
               </li>

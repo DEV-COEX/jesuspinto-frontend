@@ -1,5 +1,5 @@
 <template>
-  <div class="slim">
+  <div class="slim ">
     <div class="flex flex-col h-screen flex-grow">
       <header class="z-40 fixed top-0">
         <NavbarComponent :menu="menu" class="w-full fixed top-0 left-0" />

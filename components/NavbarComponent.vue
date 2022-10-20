@@ -3,7 +3,7 @@
     <LoadingComponent v-if="isLoading" />
     <nav
       v-else
-      class="bg-blue-700 md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
+      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
     >
       <div class="w-1/7 lg:w-auto h-full flex items-center justify-center">
         <div
@@ -15,7 +15,7 @@
       <div id="navigation" class="hidden md:block">
         <ul class="flex">
           <li v-for="(item, i) in menu" :key="i" class="mx-3">
-            <nuxt-link class="text-blue-500 font-bold" :to="item.path"
+            <nuxt-link class="text-[#9B9E0B] font-bold" :to="item.path"
               >{{ item.name }}
             </nuxt-link>
           </li>
@@ -47,7 +47,7 @@
         <div class="flex items-center">
           <button
             type="button"
-            class="text-white lg:text-blue-500 mx-2 hidden lg:block"
+            class="text-white lg:text-[#9B9E0B] mx-2 hidden lg:block"
             @click="toggleAccountMenu"
           >
             <svg
@@ -67,12 +67,6 @@
             v-if="isShow"
             class="bg-white absolute top-full right-2 flex flex-col items-start justify-center rounded-lg px-5 py-3 shadow min-w-max"
           >
-            <nuxt-link
-              v-if="user"
-              to="/profile"
-              class="text-blue-500 font-bold"
-              >Mi perfil
-            </nuxt-link>
             <button v-if="user" @click="logout">Cerrar Sesion</button>
             <nuxt-link v-else to="/login">Iniciar Sesion</nuxt-link>
           </div>
@@ -109,11 +103,6 @@
               <li v-for="(item, i) in menu" :key="i" class="mx-3 my-2">
                 <nuxt-link class="text-blue-500 font-bold" :to="item.path"
                   >{{ item.name }}
-                </nuxt-link>
-              </li>
-              <li class="mx-3 my-2">
-                <nuxt-link class="text-blue-500 font-bold" to="/profile">
-                  Perfil
                 </nuxt-link>
               </li>
             </ul>

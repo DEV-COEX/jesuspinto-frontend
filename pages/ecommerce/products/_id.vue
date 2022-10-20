@@ -8,14 +8,14 @@
             :show="true"
             :title="'Guardar Cambios'"
             :type="'submit'"
-            class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5 my-5"
+           
           />
         </div>
         <hr class="border rounded-full gb-gray-400 border-gray-400"/>
       </section>
       <div class="flex justify-center lg:flex-row flex-col">
         <div
-          class="flex flex-col lg:w-3/5 w-full bg-white rounded-xl p-10 mr-10"
+          class="flex flex-col lg:w-3/5 w-full bg-white rounded-xl p-10 mr-10 shadow-2xl"
         >
           <div class="flex md:flex-row flex-col">
             <div class="md:w-1/2 w-full mr-4 flex flex-col">
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <div class="lg:w-2/5 w-full mt-10 lg:mt-0 bg-white rounded-xl p-10">
+        <div class="lg:w-2/5 w-full mt-10 lg:mt-0 bg-white rounded-xl p-10 shadow-2xl">
           <div class="flex flex-col">
             <div
               class="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between w-full items-center"
@@ -187,7 +187,7 @@
           </div>
           <div
             v-if="product.subcategory"
-            class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
+            class="bg-blue-100 border border-[#A7AA00] text-[#A7AA00] px-4 py-3 rounded relative mb-3"
             role="alert"
           >
             <strong class="font-bold">{{ product.subcategory.category.name }}</strong>
@@ -215,7 +215,7 @@
           </div>
           <div
             v-if="product.subcategory"
-            class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
+            class="bg-blue-100 border border-[#A7AA00] text-[#A7AA00] px-4 py-3 rounded relative mb-3"
             role="alert"
           >
             <strong class="font-bold">{{ product.subcategory.name }}</strong>
@@ -274,26 +274,26 @@
 
             <div class="flex flex-col mt-5">
               <label class="font-bold text-gray-600">Destacado</label>
-              <div class="flex pt-2">
+              <div class="flex">
                 <ButtonComponent
                   :class="
                     isFeatured === 1
-                      ? 'bg-blue-800 text-white'
-                      : 'text-blue-700 bg-blue-50 hover:bg-blue-200 focus:ring-blue-300'
-                  "
-                  class="focus:outline-none border-2 border-blue-400 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
+                      ? 'bg-black text-white'
+                      : 'text-[black] hover:bg-black hover:text-white focus:ring-black border-black'
+                      "
+                  class="focus:outline-none border-2 border-black mx-2 hover:bg-black font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2 ease-in-out duration-200"
                   :show="true"
                   :type="'button'"
-                  :title="'Si'"
+                  :title="'Sí'"
                   @accionBoton="featuredProduct(1)"
                 ></ButtonComponent>
                 <ButtonComponent
                   :class="
                     isFeatured === 0
-                      ? 'bg-blue-800 text-white'
-                      : 'text-blue-700 bg-blue-50 hover:bg-blue-200 focus:ring-blue-300'
+                      ? 'bg-red-600  text-white'
+                      : 'text-red-600  hover:bg-red-600  focus:ring-blue-300'
                   "
-                  class="focus:outline-none border-2 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
+                  class="focus:outline-none border-2 font-medium border-red-600 rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2 hover:bg-red-600"
                   :type="'button'"
                   :show="true"
                   :title="'No'"

@@ -3,7 +3,7 @@
     <Transition name="fade">
       <div
         v-if="modal"
-        class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-20"
+        class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-50"
       />
     </Transition>
     <Transition name="bounce">
@@ -82,7 +82,7 @@
             </button>
             <nuxt-link
               to="/ecommerce/products/create"
-              class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5 my-5"
+              class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl w-max px-5 my-5 hover:bg-[#A7AA00]"
             >
               Agregar producto
             </nuxt-link>
@@ -95,14 +95,14 @@
           class="w-full text-sm text-left text-gray-500 dark:text-gray-400 z-0"
         >
           <thead
-            class="text-xs text-blue-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 text-center"
+            class="text-xs text-[#9B9E0B] uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 text-center"
           >
             <tr>
               <th scope="col" class="py-3 px-6">
                 <input
                   ref="checkAll"
                   type="checkbox"
-                  class="appearance-none checked:bg-blue-600 checked:border-transparent"
+                  class="appearance-none checked:bg-[#AA8500] checked:border-transparent"
                   @click="checkAll"
                 />
               </th>
@@ -129,7 +129,7 @@
                   ref="checkbox"
                   :value="product.id"
                   type="checkbox"
-                  class="appearance-none checked:bg-blue-600 checked:border-transparent"
+                  class="appearance-none checked:bg-[#AA8500] checked:border-transparent"
                   @click="pushProduct(product.id)"
                 />
               </td>
@@ -141,7 +141,7 @@
                       ? product.images[0].path
                       : 'http://via.placeholder.com/640x360'
                   "
-                  class="bg-gray-100 w-28 rounded-full duration-200 ease-in-out hover:bg-transparent"
+                  class="bg-gray-100 w-28 rounded-lg duration-200 ease-in-out hover:bg-transparent"
                   alt="Imagen de producto"
                 />
               </td>
@@ -414,4 +414,6 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
+
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="state" class="centrar fondo-modal" style="left: 0; z-index: 1">
+  <div v-if="state" class="centrar fondo-modal z-50" style="left: 0">
     <div class="modal-principal">
       <div class="separar">
         <label class="font-bold text-base py-4 ml-5">{{ titulo }}</label>
@@ -29,13 +29,9 @@
         <div
           class="flex items-center justify-between border-2 border-transparent border-t-indigo-500"
         ></div>
-        <div class="end m-4">
-          <button
-            class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5"
-            @click="metodoBoton"
-          >
-            {{ textBtn }}
-          </button>
+        <div class="end ">
+          <button-component :title=textBtn   @accionBoton="metodoBoton"/>
+        
         </div>
       </div>
     </div>

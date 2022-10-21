@@ -1,5 +1,10 @@
 <template>
-  <button v-if="show" :type="type" @click="accionBoton" class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl w-max px-5 my-5 hover:bg-[#A7AA00]">
+  <button
+    v-if="show"
+    :type="type"
+    @click="accionBoton"
+    class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl w-max px-5 my-5 hover:bg-[#A7AA00]"
+  >
     {{ title }}
   </button>
 </template>
@@ -30,12 +35,11 @@ export default {
 </script>
 
 <style>
-.boton{
- 
+.boton {
   position: relative;
 }
 .boton:before {
-  content:"";
+  content: '';
   position: absolute;
   top: 0px;
   left: 0px;
@@ -45,5 +49,6 @@ export default {
   transition: all 2s ease;
 }
 .boton:hover:before {
-width: 100%;
-}</style>
+  width: 100%;
+}
+</style>

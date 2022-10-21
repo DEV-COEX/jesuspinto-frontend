@@ -32,7 +32,7 @@
           >
             <button
               type="button"
-              class="text-blue-500 my-0.5 flex items-center justify-between w-full"
+              class="text-[#9B9E0B] my-0.5 flex items-center justify-between w-full"
               @click="allProducts()"
             >
               <p
@@ -48,7 +48,7 @@
             >
               <button
                 type="button"
-                class="text-blue-500 my-0.5 flex items-center justify-between w-full hover:font-semibold ease-in-out duration-100"
+                class="text-[#9B9E0B] my-0.5 flex items-center justify-between w-full hover:font-semibold ease-in-out duration-100"
                 @click="fetchProductsByCategory(category.id)"
               >
                 <span class="break-all">{{ category.name }}</span>
@@ -98,7 +98,7 @@
               >
                 <button
                   type="button"
-                  class="text-blue-500 my-0.5 flex items-center justify-between w-full"
+                  class="text-[#9B9E0B] my-0.5 flex items-center justify-between w-full"
                   @click="fetchProductsByCategory(category.id)"
                 >
                   <span class="break-all">{{ category.name }}</span>
@@ -134,7 +134,7 @@
         <div
           class="mt-5 md:mt-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 h-full w-full content-center mb-5"
         >
-          <div v-for="product in products" :key="product.id" class="min-w-full">
+          <div v-for="product in products" :key="product.id" class="min-w-full ">
             <ProductCardComponent :product="product" />
           </div>
         </div>

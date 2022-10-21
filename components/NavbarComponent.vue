@@ -3,7 +3,7 @@
     <LoadingComponent v-if="isLoading" />
     <nav
       v-else
-      class="bg-blue-700 md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
+      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
     >
       <div class="w-1/7 lg:w-auto h-full flex items-center justify-center">
         <div
@@ -16,7 +16,7 @@
         <ul class="flex">
           <li v-for="(item, i) in menu" :key="i" class="mx-3">
             <nuxt-link
-              class="text-blue-500 font-bold ease-in-out duration-200 hover:text-blue-600"
+              class="text-[#9B9E0B] font-bold ease-in-out duration-200 "
               :to="item.path"
               >{{ item.name }}
             </nuxt-link>
@@ -52,7 +52,7 @@
         <div class="flex items-center">
           <nuxt-link
             to="/payments"
-            class="text-white md:text-blue-500 mx-2 relative hover:text-blue-600 duration-200 ease-in-out"
+            class="text-white md:text-[#9B9E0B] mx-2 relative hover:text-red-600 duration-200 ease-in-out"
           >
             <span
               v-if="onCart"
@@ -74,7 +74,7 @@
           </nuxt-link>
           <nuxt-link
             to="/wishlist"
-            class="text-white md:text-blue-500 mx-2 hidden md:block mt-1 relative hover:text-blue-600 duration-200 ease-in-out"
+            class="text-white md:text-[#9B9E0B] mx-2 hidden md:block mt-1 relative hover:text-red-600 duration-200 ease-in-out"
           >
             <span
               v-if="onLiked"
@@ -97,7 +97,7 @@
           </nuxt-link>
           <button
             type="button"
-            class="text-white lg:text-blue-500 mx-2 hidden lg:block ease-in-out duration-200 hover:text-blue-600"
+            class="text-white lg:text-[#9B9E0B] mx-2 hidden lg:block ease-in-out duration-200 "
             @click="toggleAcountMenu"
           >
             <svg

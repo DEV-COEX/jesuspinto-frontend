@@ -8,7 +8,7 @@
       >
         <section id="masonry" class="grid grid-cols-1 md:grid-cols-2 h-full">
           <div
-            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center"
+            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center shadow-xl"
           >
             <img
               src="@/static/example/image-2.png"
@@ -17,7 +17,7 @@
             />
           </div>
           <div
-            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center"
+            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center shadow-xl"
           >
             <img
               src="@/static/example/image-3.png"
@@ -100,7 +100,7 @@
               <h1 class="font-bold text-lg">Tus recomendados</h1>
               <button
                 type="button"
-                class="font-light text-blue-500 text-xs ml-2"
+                class="font-light text-[#9B9E0B] text-xs ml-2 underline"
               >
                 Ver más
               </button>

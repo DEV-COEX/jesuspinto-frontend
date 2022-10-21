@@ -1,5 +1,5 @@
 <template>
-  <div v-if="product" class="relative w-full p-5 my-2 md:my-0 rounded-lg">
+  <div v-if="product" class="relative w-full p-5 my-2 md:my-0 rounded-lg ">
     <div class="absolute top-5 right-5 flex items-center m-5 z-40">
       <Transition name="bounce">
         <button
@@ -23,7 +23,7 @@
         </button>
         <button
           v-else
-          class="text-blue-500 hover:text-blue-600 mr-1 ease-in-out duration-200"
+          class="text-[#9B9E0B] hover:text-red-600 mr-1 ease-in-out duration-200"
           type="button"
           @click="toCartProducts"
         >
@@ -64,7 +64,7 @@
         </button>
         <button
           v-else
-          class="text-blue-500 hover:text-blue-600 ml-1 ease-in-out duration-200"
+          class="text-[#9B9E0B] hover:text-red-600 ml-1 ease-in-out duration-200"
           type="button"
           @click="toLikedProducts"
         >
@@ -84,7 +84,7 @@
         </button>
       </Transition>
     </div>
-    <div class="bg-white rounded-lg w-full h-full relative overflow-hidden">
+    <div class="bg-white rounded-lg w-full h-full relative overflow-hidden shadow-xl border-t-2 border-inherit">
       <div class="w-full">
         <div
           :style="styles(product.images)"

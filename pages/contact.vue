@@ -8,7 +8,7 @@
     </div>
 
     <div
-      class="flex flex-col bg-white rounded-xl w-full md:w-full justify-center p-6 sm:p-10 m-10 lg:w-1/2 sm:w-full"
+      class="flex flex-col bg-white rounded-xl w-full  shadow md:w-full justify-center p-6 sm:p-10 m-10 lg:w-1/2 sm:w-full"
     >
       <form>
         <div class="flex flex-col md:flex-row w-full md:pt-2">

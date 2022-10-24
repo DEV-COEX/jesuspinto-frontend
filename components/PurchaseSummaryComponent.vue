@@ -33,6 +33,7 @@
           placeholder="Codigo descuento"
           class="border-2 w-44 xl:w-1/2 border-gray-300 rounded-xl focus:outline-none pl-2"
         />
+        <button-component title="Aplicar" @click="onDiscount"></button-component>
         <button
           class="xl:w-1/5 ease-in-out duration-200 w-auto focus:outline-none border-2 border-blue-300 bg-opacity-25 text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5"
           @click="onDiscount"

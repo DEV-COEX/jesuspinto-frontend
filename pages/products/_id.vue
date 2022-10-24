@@ -14,7 +14,7 @@
                 <div
                   v-for="(image, i) in images"
                   :key="i"
-                  class="bg-white rounded-lg p-2 h-30 w-30 mb-2 mx-1 md:mx-0"
+                  class="bg-white rounded-lg p-2 h-30 w-30 mb-2 mx-1 md:mx-0 shadow"
                 >
                   <img
                     class="object-contain h-20 w-20 block mx-auto"
@@ -28,10 +28,10 @@
             <div
               class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-2 md:px-2 md:w-5/6 lg:my-2 lg:px-2 lg:w-5/6 xl:my-2 xl:px-2 xl:w-5/6"
             >
-              <div class="bg-white rounded-lg p-2 flex justify-center">
+              <div class="bg-white rounded-lg p-2 flex justify-center shadow">
                 <inner-image-zoom
                   ref="currentImage"
-                  class="block mx-auto ease-in-out duration-200 transition-all object-contain h-full"
+                  class="block mx-auto ease-in-out duration-200 transition-all object-contain h-full rounded-lg"
                   :src="currentImage.path"
                 ></inner-image-zoom>
               </div>

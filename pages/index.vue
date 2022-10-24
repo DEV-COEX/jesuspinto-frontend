@@ -53,7 +53,7 @@
               <h1 class="font-bold text-lg">
                 Lo último
                 <nuxt-link
-                  class="font-light text-blue-500 text-xs ml-2"
+                  class="font-light text-[#9B9E0B] underline text-xs ml-2"
                   to="/products"
                   >Ver más
                 </nuxt-link>

@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col bg-white rounded-xl w-full h-full">
+  <div class="flex flex-col bg-white  shadow rounded-xl w-full h-full">
     <div class="flex justify-between px-4 pt-4 w-full">
       <span class="font-bold text-2xl uppercase">{{ product.name }}</span>
       <Transition name="bounce">
         <button
           v-if="onLiked"
-          class="text-red-500 hover:text-red-400 ease-in-out duration-200 ml-5"
+          class="text-red-500 hover:text-red-600 ease-in-out duration-200 ml-5"
           type="button"
           @click="toLikedProducts"
         >
@@ -25,7 +25,7 @@
         </button>
         <button
           v-else
-          class="text-blue-500 hover:text-blue-600 ease-in-out duration-200 ml-5"
+          class="text-[#9B9E0B] hover:text-red-600 ease-in-out duration-200 ml-5"
           type="button"
           @click="toLikedProducts"
         >
@@ -58,17 +58,17 @@
       </p>
       <label
         v-if="isActive"
-        class="cursor-pointer underline text-blue-500 hover:text-blue-600"
+        class="cursor-pointer underline text-[#9B9E0B] "
         @click="verMas"
         >Ver más
       </label>
       <label
         v-if="!isActive"
-        class="cursor-pointer underline text-blue-500 hover:text-blue-600"
+        class="cursor-pointer underline text-[#9B9E0B] "
         @click="verMas"
         >Ver menos
       </label>
-      <h2 class="font-bold text-xl text-blue-700 mt-2">{{ price }}</h2>
+      <h2 class="font-bold text-xl text-[#15803d] mt-2">{{ price }}</h2>
     </div>
     <div
       class="flex flex-col md:flex-row justify-center items-center px-4 w-full"
@@ -76,7 +76,7 @@
       <div
         class="flex flex-col md:flex-row justify-center items-center max-w-max"
       >
-        <span class="text-blue-700 font-semibold mr-2">Cantidad:</span>
+        <span class=" font-semibold mr-2">Cantidad:</span>
       </div>
       <div class="flex justify-center items-center w-full py-2">
         <form class="flex" @submit.prevent>
@@ -134,14 +134,14 @@
       class="flex flex-col w-full justify-center content-center items-center p-5"
     >
       <ButtonComponent
-        class="w-full focus:outline-none text-white bg-blue-500 hover:bg-blue-600 ease-in-out duration-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
+       
         :title="'Comprar ahora'"
         :show="true"
         :type="'button'"
         @accionBoton="buyNow()"
       />
       <ButtonComponent
-        class="w-full ease-in-out duration-200 hover:text-white font-semibold focus:outline-none border-2 border-blue-300 hover:border-blue-400 bg-opacity-25 text-blue-700 bg-blue-200 hover:bg-blue-200 focus:ring-4 focus:ring-blue-300 rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
+        class="w-full ease-in-out duration-200 hover:text-black font-semibold focus:outline-none border-2 border-red-600  bg-opacity-25 text-red-600 bg-red-200 hover:bg-red-600 rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
         :title="'Añadir al carrito'"
         :show="true"
         :type="'button'"

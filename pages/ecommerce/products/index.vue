@@ -4,8 +4,7 @@
       v-if="hasProducts === null"
       class="loadingElements gap-2 flex-col justify-center z-[-1]"
     >
-      <span
-        class="order-last font-bold text-2xl  animate-bounce tracking-tight"
+      <span class="order-last font-bold text-2xl animate-bounce tracking-tight"
         >Cargando productos</span
       >
       <img
@@ -18,9 +17,7 @@
       v-else-if="!hasProducts"
       class="loadingElements items-center justify-center w-full"
     >
-      <div
-        class="md:w-1/2 flex flex-col items-center  p-10 rounded-2xl"
-      >
+      <div class="md:w-1/2 flex flex-col items-center p-10 rounded-2xl">
         <img
           alt=""
           class="w-1/6 xl:w-1/12 fill-purple-600"
@@ -281,7 +278,7 @@ export default {
     products: [],
     currentProducts: [],
     idProduct: 0,
-    idsProducts: 0,
+    idsProducts: [],
     currentPage: 1,
     arrayId: [],
     modal: false,
@@ -437,6 +434,7 @@ export default {
       }
     },
     checkAll() {
+      console.log('Paso por aca')
       const referencias = this.$refs.checkbox
       if (this.$refs.checkAll.checked === true) {
         referencias.forEach((element) => {

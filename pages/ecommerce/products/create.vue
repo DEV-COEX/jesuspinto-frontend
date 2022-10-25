@@ -320,10 +320,14 @@ export default {
       const file = this.$refs.principalImg.files[0]
       this.img = file
       const reader = new FileReader()
+      
       reader.onload = (event) => {
         document.getElementById('imgPreview').src = event.target.result
       }
-      reader.readAsDataURL(file)
+      if(file){
+        reader.readAsDataURL(file)
+      }
+      
     },
     previewImages() {
       const files = this.$refs.images.files

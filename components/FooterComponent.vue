@@ -3,7 +3,7 @@
     class="bg-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 md:py-10 md:px-20 lg:px-32 w-full content-center text-sm"
   >
     <div class="mt-10 mx-2 md:mx-0 md:mt-0">
-      <h3 class="font-bold md:mb-10">Menu</h3>
+      <h3 class="font-bold md:mb-10">Menú</h3>
       <ul>
         <li class="my-2">
           <a href="/">Inicio</a>
@@ -53,7 +53,7 @@
       </ul>
     </div>
     <div
-      class="border-t-2 mx-2 lg:border-l-2 md:border-t-0 border-blue-200 pt-2 lg:pt-0 lg:pl-3 lg:pb-36 mt-5 mb-10 md:mt-0"
+      class="border-t-2 mx-2 lg:border-l-2 md:border-t-0 border-blue-200 pt-2 lg:pt-0 lg:pl-3 lg:pb-14 mt-5 md:mt-0"
     >
       <h3 class="font-bold mb-2 md:mb-10">Síguenos</h3>
       <ul class="flex">

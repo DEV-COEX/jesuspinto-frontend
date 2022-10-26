@@ -3,11 +3,30 @@
     <LoadingComponent v-if="isLoading" />
     <nav
       v-else
-      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
+      class="
+        bg-[#9B9E0B]
+        md:bg-white md:shadow-md
+        rounded-b-lg
+        md:rounded-lg
+        flex
+        items-center
+        md:justify-between
+        h-20
+        md:px-5
+      "
     >
       <div class="w-1/7 lg:w-auto h-full flex items-center justify-center">
         <div
-          class="bg-blue-100 rounded-lg h-full hidden md:flex md:items-center w-min max-h-10 px-3"
+          class="
+            bg-blue-100
+            rounded-lg
+            h-full
+            hidden
+            md:flex md:items-center
+            w-min
+            max-h-10
+            px-3
+          "
         >
           <a href="/" class="uppercase font-bold text-blue-400">logo</a>
         </div>
@@ -65,7 +84,20 @@
           </button>
           <div
             v-if="isShow"
-            class="bg-white absolute top-full right-2 flex flex-col items-start justify-center rounded-lg px-5 py-3 shadow min-w-max"
+            class="
+              bg-white
+              absolute
+              top-full
+              right-2
+              flex flex-col
+              items-start
+              justify-center
+              rounded-lg
+              px-5
+              py-3
+              shadow
+              min-w-max
+            "
           >
             <button v-if="user" @click="logout">Cerrar Sesion</button>
             <nuxt-link v-else to="/login">Iniciar Sesion</nuxt-link>
@@ -75,7 +107,19 @@
       <Transition name="slide">
         <div
           v-show="isToggle"
-          class="mr-0 fixed md:hidden top-0 left-0 h-screen w-3/5 rounded-r-lg mt-20 bg-white z-50"
+          class="
+            mr-0
+            fixed
+            md:hidden
+            top-0
+            left-0
+            h-screen
+            w-3/5
+            rounded-r-lg
+            mt-20
+            bg-white
+            z-50
+          "
         >
           <aside class="h-full w-full rounded-r shadow-2xl p-5">
             <header class="flex justify-between items-center">

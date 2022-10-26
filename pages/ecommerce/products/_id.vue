@@ -8,7 +8,7 @@
             :show="true"
             :title="'Guardar Cambios'"
             :type="'submit'"
-           
+
           />
         </div>
         <hr class="border rounded-full gb-gray-400 border-gray-400"/>
@@ -153,11 +153,18 @@
               </div>
             </div>
             <Transition name="fade">
-              <div v-if="imagenes.length > 0" class="flex w-full mt-4">
+              <div class="flex w-full mt-4">
+                <img
+                  v-for="(imagen, index) in images"
+                  :id="`imagesPreview-${imagen.name}`"
+                  :key="index"
+                  :src="`${imagen.path}`"
+                  class="p-3 w-1/4"
+                  :alt="'Imagen ' + index" />
                 <img
                   v-for="(imagen, index) in imagenes"
                   :id="`imagesPreview-${imagen.name}`"
-                  :key="index"
+                  :key="index + 1"
                   :src="`${imagen}`"
                   class="p-3 w-1/4"
                   :alt="'Imagen ' + index"/>
@@ -432,6 +439,8 @@ export default {
       this.imagenes = this.img
     },
     previewImages() {
+      console.log(this.$refs.imagenes.files, this.images, this.img)
+      // this.imagenes = [...this.images]
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
       array.forEach((element) => {
@@ -500,6 +509,7 @@ export default {
         await this.$axios.put(
           `/api/v1/admin/product/${this.product.id}/`,
           {
+            images: this.imagenes,
             name: this.product.name,
             description: this.product.description,
             price: this.product.price,
@@ -525,7 +535,6 @@ export default {
     async createProduct() {
       try {
         const payload = new FormData()
-        payload.append('image', this.img)
         payload.append('name', this.name)
         payload.append('serial', this.serial)
         payload.append('description', this.description)

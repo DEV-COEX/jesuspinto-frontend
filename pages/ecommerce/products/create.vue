@@ -381,7 +381,7 @@ export default {
       this.featured = state
       this.onFeatured();
     },
-    createProduct() {
+    async createProduct() {
       try {
         const payload = new FormData()
         payload.append('image', this.img)
@@ -399,21 +399,21 @@ export default {
         for (let i = 0; i < this.images.length; i++) {
           payload.append('images[]', this.images[i], `${this.images[i].name}`)
         }
-        return console.log('hola: ', payload.getAll('images[]'))
-        // await this.$axios
-        //   .post('/api/v1/admin/product/', payload, {
-        //     params: {
-        //       tags: this.tags_id,
-        //     },
-        //   })
-        //   .then((response) => {
-        //     this.$notify({
-        //       title: 'Registro exitoso',
-        //       type: 'success',
-        //       text: 'Producto registrado correctamente!',
-        //     })
-        //     this.$router.push('/ecommerce/products/')
-        //   })
+        // return console.log('hola: ', payload.getAll('images[]'))
+          await this.$axios
+          .post('/api/v1/admin/product/', payload, {
+            params: {
+              tags: this.tags_id,
+            },
+          })
+          .then((response) => {
+            this.$notify({
+              title: 'Registro exitoso',
+              type: 'success',
+              text: 'Producto registrado correctamente!',
+            })
+            this.$router.push('/ecommerce/products/')
+          })
       } catch (error) {
         this.$notify({
           title: 'Error',

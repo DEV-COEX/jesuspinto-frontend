@@ -8,7 +8,7 @@
             :show="true"
             :title="'Agregar'"
             :type="'submit'"
-            
+
           />
         </div>
         <hr class="border rounded-full gb-gray-400 border-gray-400"/>
@@ -381,7 +381,7 @@ export default {
       this.featured = state
       this.onFeatured();
     },
-    async createProduct() {
+    createProduct() {
       try {
         const payload = new FormData()
         payload.append('image', this.img)
@@ -393,23 +393,27 @@ export default {
         payload.append('subcategory_id', this.subcategory)
         payload.append('image', this.img)
         payload.append('featured', this.featured)
-        this.images.forEach((element) => {
-          payload.append('images[]', element)
-        })
-        await this.$axios
-          .post('/api/v1/admin/product/', payload, {
-            params: {
-              tags: this.tags_id,
-            },
-          })
-          .then((response) => {
-            this.$notify({
-              title: 'Registro exitoso',
-              type: 'success',
-              text: 'Producto registrado correctamente!',
-            })
-            this.$router.push('/ecommerce/products/')
-          })
+        // this.images.forEach((element) => {
+        //   payload.append('images[]', element, `${element.name}`)
+        // })
+        for (let i = 0; i < this.images.length; i++) {
+          payload.append('images[]', this.images[i], `${this.images[i].name}`)
+        }
+        return console.log('hola: ', payload.getAll('images[]'))
+        // await this.$axios
+        //   .post('/api/v1/admin/product/', payload, {
+        //     params: {
+        //       tags: this.tags_id,
+        //     },
+        //   })
+        //   .then((response) => {
+        //     this.$notify({
+        //       title: 'Registro exitoso',
+        //       type: 'success',
+        //       text: 'Producto registrado correctamente!',
+        //     })
+        //     this.$router.push('/ecommerce/products/')
+        //   })
       } catch (error) {
         this.$notify({
           title: 'Error',

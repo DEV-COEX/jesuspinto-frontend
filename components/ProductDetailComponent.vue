@@ -141,7 +141,7 @@
         @accionBoton="buyNow()"
       />
       <ButtonComponent
-        class="w-full ease-in-out duration-200 hover:text-black font-semibold focus:outline-none border-2 border-red-600  bg-opacity-25 text-red-600 bg-red-200 hover:bg-red-600 rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
+        class=" ease-in-out duration-200 hover:text-black font-semibold focus:outline-none border-2 border-red-600  bg-opacity-25 text-red-600 bg-red-200 hover:bg-red-600 rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2"
         :title="'Añadir al carrito'"
         :show="true"
         :type="'button'"

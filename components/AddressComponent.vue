@@ -139,7 +139,7 @@
                 :show="true"
                 :title="'Agregar'"
                 :type="'submit'"
-                class="bg-blue-700 border-2 border-white hover:bg-blue-800 ease-in-out duration-75 text-white py-2 rounded-xl px-5"
+               
               ></ButtonComponent>
             </div>
           </form>

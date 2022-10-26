@@ -64,7 +64,7 @@
       </form>
     </div>
     <div
-      class="bg-blue-100 w-5 h-5 absolute top-2 right-2 text-blue-800 rounded hover:bg-blue-600 hover:text-white duration-200 ease-in-out"
+      class="bg-red-100 w-5 h-5 absolute top-2 right-2 text-red-600 rounded hover:bg-red-600 hover:text-white duration-200 ease-in-out"
     >
       <button type="button" @click="removeProduct">
         <svg
@@ -82,7 +82,7 @@
       </button>
     </div>
     <div
-      class="w-full flex flex-col items-start justify-center h-16 bg-blue-50 hover:bg-blue-700 hover:text-white ease-in-out duration-300 absolute left-0 rounded-b-2xl p-2"
+      class="w-full flex flex-col items-start justify-center h-16 bg-blue-50 hover:bg-[#9B9E0B] hover:text-white ease-in-out duration-300 absolute left-0 rounded-b-2xl p-2"
     >
       <p class="text-xs uppercase font-semibold">
         {{ product.name }}

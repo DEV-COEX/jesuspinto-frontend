@@ -1,7 +1,7 @@
 <template>
   <button
     v-if="show"
-    class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl w-max px-5 my-5 hover:bg-[#A7AA00]"
+    class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl px-5 my-5 hover:bg-[#A7AA00]"
     :type="type"
     @click="accionBoton"
   >

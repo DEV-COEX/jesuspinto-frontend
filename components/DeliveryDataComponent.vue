@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col rounded-xl p-8 bg-white">
+  <div class="flex flex-col rounded-xl p-8 bg-white shadow">
     <div class="contents py-10">
       <h2 class="text-xl font-bold py-2">Datos de entrega</h2>
       <hr class="bg-gray-400 border-gray-400 rounded-full"/>
@@ -16,7 +16,7 @@
           <input
             v-model="name"
             type="text"
-            class="border-2 border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
+            class="border border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
             placeholder="Ingrese su nombre"
             required
           />
@@ -29,7 +29,7 @@
           <input
             v-model="lastname"
             type="text"
-            class="border-2 border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
+            class="border border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
             placeholder="Ingrese su apellido"
             required
           />
@@ -42,7 +42,7 @@
           <input
             v-model="phone"
             type="number"
-            class="border-2 border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
+            class="border border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
             placeholder="Ingrese un numero de telefono"
             required
           />
@@ -55,7 +55,7 @@
           <input
             v-model="address"
             type="text"
-            class="border-2 border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
+            class="border border-gray-300 focus:outline-none focus:border-blue-800 rounded-lg p-2"
             placeholder="Ingrese una direccion"
             required
           />
@@ -140,17 +140,8 @@
         </div>
       </div>
     </div>
-    <div class="flex">
-      <button
-        class="bg-blue-600 w-1/2 lg:px-3 xl:w-1/3 block mx-auto py-3 rounded-lg text-white ease-in-out hover:bg-blue-500 duration-200 mt-3"
-        :class="{
-          'bg-blue-600': isAdding === false,
-          'bg-red-700 hover:bg-red-800': isAdding === true,
-        }"
-        @click="$router.push('/profile/address')"
-      >
-        Agregar direccion
-      </button>
+    <div class="flex justify-center">
+      <button-component title="Agregar direccion"  @accionBoton="$router.push('/profile/address')"></button-component>
     </div>
   </div>
 </template>

@@ -8,7 +8,7 @@
     </div>
     <section
       id="address"
-      class="flex flex-col bg-white rounded-xl w-full lg:w-1/2 justify-center sm:p-10 p-3 m-10 ease-in-out transition-all duration-200"
+      class="flex flex-col bg-white shadow rounded-xl w-full lg:w-1/2 justify-center sm:p-10 p-3 m-10 ease-in-out transition-all duration-200"
     >
       <template v-if="addresses.length > 0">
         <AddressComponent
@@ -29,7 +29,7 @@
       <button
         v-if="!showForm"
         type="button"
-        class="text-white bg-blue-600 hover:bg-blue-700 ease-in-out duration-200 py-3 z-30 rounded-xl"
+        class="w-full boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl  px-5 my-5 hover:bg-[#A7AA00]"
         @click="showFormAdd"
       >
         Agregar direccion
@@ -87,21 +87,21 @@
                 </option>
               </select>
             </div>
-            <div class="flex flex-col md:flex-row w-full mt-9 items-center">
+            <div class="flex flex-col md:flex-row  mt-9 justify-around items-center">
               <ButtonComponent
                 :show="true"
                 :title="'Guardar cambios'"
                 :type="'submit'"
-                class="bg-blue-600 border-2 border-white hover:bg-blue-700 ease-in-out duration-200 text-white py-2 rounded-xl w-full md:w-1/2 px-5 md:mr-1 mb-1 md:mb-0"
+                class="bg-blue-600 border-2 mr-4  w-full border-white hover:bg-blue-700 ease-in-out duration-200 text-white rounded-xl "
               ></ButtonComponent>
-              <button
-                v-if="showForm"
+              <ButtonComponent
+              v-if="showForm"
                 type="button"
-                class="text-white z-30 py-2 bg-red-600 rounded-xl hover:bg-red-700 hover:font-bold ease-in-out duration-200 w-full md:w-1/2 md:ml-1 mt-2 md:mt-0"
+                :title="'Cancelar'"
+                class="text-white z-30  bg-red-600 rounded-xl hover:bg-red-700 hover:font-bold ease-in-out duration-200 w-full "
                 @click="showFormAdd"
-              >
-                Cancelar
-              </button>
+              ></ButtonComponent>
+            
             </div>
           </form>
         </div>

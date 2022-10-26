@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col bg-white rounded-xl px-6 py-6 md:px-8 md:py-7 xl:px-16 xl:py-10"
+    class="flex flex-col bg-white rounded-xl shadow px-6 py-6 md:px-8 md:py-7 xl:px-16 xl:py-10"
   >
     <div>
       <h2 class="font-bold text-xl py-2">Resumen de compra</h2>
@@ -14,9 +14,9 @@
     >
       <carousel :per-page="4">
         <slide v-for="product in products" :key="product.id" class="p-2">
-          <div class="bg-gray-400 rounded-lg">
+          <div class="bg-gray-400 rounded-lg ">
             <img
-              class="p-5 rounded-lg w-32 h-32"
+              class=" rounded-lg w-32 h-32"
               :src="product.images[0].path"
               :alt="product.images[0].path"
             />
@@ -33,13 +33,8 @@
           placeholder="Codigo descuento"
           class="border-2 w-44 xl:w-1/2 border-gray-300 rounded-xl focus:outline-none pl-2"
         />
-        <button-component title="Aplicar" @click="onDiscount"></button-component>
-        <button
-          class="xl:w-1/5 ease-in-out duration-200 w-auto focus:outline-none border-2 border-blue-300 bg-opacity-25 text-blue-700 bg-blue-200 hover:bg-blue-300 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5"
-          @click="onDiscount"
-        >
-          Aplicar
-        </button>
+        <button-component title="Aplicar" @accionBoton="onDiscount"></button-component>
+  
       </div>
     </div>
     <div class="flex justify-between">
@@ -67,7 +62,7 @@
       <span
         id="total"
         :class="isLoading === true ? 'animate-pulse text-gray-600' : ''"
-        class="text-blue-700"
+        class="text-[#15803d]"
         >{{ formatMoney(total) }}</span
       >
     </div>
@@ -75,7 +70,7 @@
       <nuxt-link
         v-if="route === '/payments/' || route === '/payments'"
         to="/payments/delivery"
-        class="w-full focus:outline-none text-white bg-blue-700 ease-in-out duration-200 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2 text-center"
+        class="w-full boton border border-black text-center hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl px-5 my-5 hover:bg-[#A7AA00]"
       >
         Datos de entrega
       </nuxt-link>
@@ -84,14 +79,14 @@
           v-if="route === '/payments/delivery'"
           to="/payments/order-info"
           type="submit"
-          class="w-full focus:outline-none text-white bg-blue-700 ease-in-out duration-200 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2 text-center"
+          class="w-full boton border border-black text-center hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl px-5 my-5 hover:bg-[#A7AA00]"
         >
           Ir a Pagar
         </nuxt-link>
       </template>
       <template v-else-if="xd === false && route === '/payments/delivery'">
         <span
-          class="w-full bg-blue-600 text-white font-bold text-center rounded-lg py-4"
+          class="w-full boton border border-black text-center hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl px-5 my-5 hover:bg-[#A7AA00]"
         >
           Seleccione una direccion para poder continuar
         </span>

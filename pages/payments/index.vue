@@ -10,7 +10,7 @@
           </h1>
         </section>
         <div
-          class="bg-white grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-10 h-full"
+          class="bg-white grid  grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-10 h-full"
         >
           <PaymentProductsComponent
             v-for="product in cartProducts"

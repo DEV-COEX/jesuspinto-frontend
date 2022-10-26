@@ -38,7 +38,7 @@
                   id="file_input_help"
                   class="mt-1 text-sm text-gray-500 dark:text-gray-300"
                 >
-                  SVG, PNG, JPG, WEBP o GIF (MAX. 800x400px).
+                  SVG, PNG, JPG o GIF (MAX. 800x400px).
                 </p>
               </div>
               <div class="w-full h-full border-0">
@@ -319,7 +319,7 @@ export default {
     previewImg() {
       const file = this.$refs.principalImg.files[0]
       const imgPreview = document.getElementById('imgPreview')
-      if (!/\.(jpe?g|png|gif|svg|webp)$/i.test(file.name)) {
+      if (!/\.(jpe?g|png|gif|svg)$/i.test(file.name)) {
         const extension = file.name.split('.')
         this.$notify({
           title: 'Ups!',
@@ -341,7 +341,7 @@ export default {
       const files = this.$refs.images.files
       const array = Array.from(files)
       array.forEach((element) => {
-        if (!/\.(jpe?g|png|gif|svg|webp)$/i.test(element.name)) {
+        if (!/\.(jpe?g|png|gif|svg)$/i.test(element.name)) {
           const extension = element.name.split('.')
           this.$notify({
             title: 'Ups!',

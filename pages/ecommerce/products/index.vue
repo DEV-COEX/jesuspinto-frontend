@@ -43,7 +43,7 @@
               v-if="ids > 1"
               class="bg-red-500 border-2 border-white hover:bg-red-600 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-2 my-5"
               type="button"
-              @click="openModal(idsProducts)"
+              @click="openModalAll()"
             >
               <svg
                 class="bi bi-trash3-fill"
@@ -269,15 +269,15 @@
 
       <Transition name="fade">
         <div
-          v-if="modal"
+          v-if="modal1"
           class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-20"
         />
       </Transition>
       <Transition name="bounce">
         <div
-          v-if="modal"
+          v-if="modal1"
           id="popup-modal"
-          :class="{ show: modal }"
+          :class="{ show: modal1 }"
           class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full"
           tabindex="-1"
         >
@@ -360,6 +360,7 @@ export default {
     currentPage: 1,
     arrayId: [],
     modal: false,
+    modal1: false,
     hasProducts: null,
   }),
   computed: {
@@ -386,6 +387,12 @@ export default {
     closeModal() {
       this.modal = !this.modal
       this.idProduct = 0
+    },
+    openModalAll(){
+      this.modal1 = !this.modal1
+    },
+    closeModalAll(){
+      this.modal1 = !this.modal1
     },
     async nextPage() {
       if (this.currentPage === this.pages) {
@@ -496,7 +503,7 @@ export default {
               this.$refs.checkAll.checked = false
             })
         })
-        this.closeModal()
+        this.closeModalAll()
         this.listProducts()
         this.$notify({
           title: 'Eliminar',

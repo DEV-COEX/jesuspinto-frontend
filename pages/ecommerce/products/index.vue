@@ -494,31 +494,37 @@ export default {
       }
     },
     async deleteProducts() {
+      this.deletingProducts = true
       try {
-        await this.idsProducts.forEach((product) => {
-          this.$axios
-            .delete(`/api/v1/admin/product/${product}`)
-            .then((response) => {
-              this.idsProducts = []
-              this.$refs.checkAll.checked = false
+        const payload = {
+          ids: this.idsProducts,
+        }
+        await this.$axios
+          .post(`/api/v1/admin/product/delete`, {
+            ...payload,
+          })
+          // await this.$axios.post(`/api/v1/admin/product/delete`, payload)
+          .then((response) => {
+            this.$notify({
+              title: 'Eliminar',
+              type: 'warning',
+              text: 'Productos eliminados!',
             })
-        })
-        this.closeModalAll()
-        this.listProducts()
-        this.$notify({
-          title: 'Eliminar',
-          type: 'warning',
-          text: 'Productos eliminados!',
-        })
+            this.closeModalAll()
+            this.listProducts()
+            this.idsProducts = []
+          })
       } catch (error) {
         this.$notify({
           title: 'Error',
           type: 'error',
           text: error?.response?.data?.error || 'Error desconocido',
         })
-        this.isLoading = false
       }
+      this.deletingProducts = false
+      this.hasProducts = null
     },
+    
     checkAll() {
       console.log('Paso por aca')
       const referencias = this.$refs.checkbox

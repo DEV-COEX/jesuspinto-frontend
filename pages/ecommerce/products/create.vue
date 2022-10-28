@@ -397,7 +397,7 @@ export default {
         //   payload.append('images[]', element, `${element.name}`)
         // })
         for (let i = 0; i < this.images.length; i++) {
-          payload.append('images[]', this.images[i], `${this.images[i].name}`)
+          payload.append('images[]', this.images[i])
         }
         // return console.log('hola: ', payload.getAll('images[]'))
           await this.$axios

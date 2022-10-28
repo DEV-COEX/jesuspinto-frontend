@@ -157,14 +157,14 @@
                 <img
                   v-for="(imagen, index) in images"
                   :id="`imagesPreview-${imagen.name}`"
-                  :key="index"
+                  :key="index + imagenes.length"
                   :src="`${imagen.path}`"
                   class="p-3 w-1/4"
                   :alt="'Imagen ' + index" />
                 <img
                   v-for="(imagen, index) in imagenes"
                   :id="`imagesPreview-${imagen.name}`"
-                  :key="index + 1"
+                  :key="index"
                   :src="`${imagen}`"
                   class="p-3 w-1/4"
                   :alt="'Imagen ' + index"/>
@@ -422,6 +422,7 @@ export default {
   },
   async created() {
     await this.$store.dispatch('fetchProducts', this.$route.path)
+
   },
   mounted() {
     this.initFunctions()
@@ -439,7 +440,6 @@ export default {
       this.imagenes = this.img
     },
     previewImages() {
-      console.log(this.$refs.imagenes.files, this.images, this.img)
       // this.imagenes = [...this.images]
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
@@ -455,6 +455,7 @@ export default {
         }
         reader.readAsDataURL(element)
       })
+      console.log(this.imagenes)
     },
     addTag(tag) {
       if (this.tagsProduct.includes(tag)) {
@@ -506,21 +507,33 @@ export default {
     },
     async updateProduct() {
       try {
+        // {
+        //   name: this.product.name,
+        //   description: this.product.description,
+        //   price: this.product.price,
+        //   quantity: this.product.quantity,
+        //   serial: this.product.serial,
+        //   subcategory_id: parseInt(this.product.subcategory),
+        //   tags: this.product.tags_id,
+        //   featured: this.product.featured,
+        //   image: this.img,
+        // }
+          const payload = new FormData()
+          payload.append('name', this.product.name)
+          payload.append('serial', this.product.serial)
+          payload.append('description', this.product.description)
+          payload.append('price', this.product.price)
+          payload.append('quantity', this.product.quantity)
+          payload.append('subcategory_id', this.product.subcategory)
+          payload.append('image', this.img)
+          payload.append('featured', this.product.featured)
+          payload.append('tags', this.product.tags_id)
+          this.imagenes.forEach((element) => {
+            payload.append('images[]', element)
+          })
         await this.$axios.put(
-          `/api/v1/admin/product/${this.product.id}/`,
-          {
-            images: this.imagenes,
-            name: this.product.name,
-            description: this.product.description,
-            price: this.product.price,
-            quantity: this.product.quantity,
-            serial: this.product.serial,
-            subcategory_id: parseInt(this.product.subcategory),
-            tags: this.product.tags_id,
-            featured: this.product.featured,
-            image: this.img,
-          }
-        ).then(() => {
+          `/api/v1/admin/product/${this.product.id}/`, payload)
+          .then(() => {
           this.$router.push('/ecommerce/products')
         })
       } catch (error) {
@@ -534,6 +547,7 @@ export default {
     },
     async createProduct() {
       try {
+
         const payload = new FormData()
         payload.append('name', this.name)
         payload.append('serial', this.serial)

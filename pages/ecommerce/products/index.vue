@@ -133,7 +133,7 @@
                 <td class="py-4 pr-4">
                   <div class="flex">
                     <nuxt-link
-                      :to="'/ecommerce/products/' + product.uuid"
+                      :to="'/ecommerce/products/' + product.id"
                       class="mr-4"
                       type="button"
                     >

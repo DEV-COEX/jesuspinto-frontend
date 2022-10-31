@@ -108,23 +108,13 @@ export default {
     },
     async editPromoCode(promocion) {
       this.isLoading = true
-      if (this.actived === true) {
-        this.activo = false
-        await this.$axios.put(`/api/v1/admin/prom-code/${promocion.id}`, {
+      this.activo = !this.activo
+      await this.$axios.put(`/api/v1/admin/prom-code/${promocion.id}`, {
           code: promocion.code,
           discount: promocion.discount,
           active: this.activo,
         })
-        await this.listPromos()
-      } else {
-        this.activo = true
-        await this.$axios.put(`/api/v1/admin/prom-code/${promocion.id}`, {
-          code: promocion.code,
-          discount: promocion.discount,
-          active: this.activo,
-        })
-        await this.listPromos()
-      }
+      await this.listPromos()
       this.isLoading = false
     },
     async editPromo() {

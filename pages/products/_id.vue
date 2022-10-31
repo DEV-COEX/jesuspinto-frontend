@@ -5,16 +5,16 @@
       <div class="grid grid-cols-1 xl:grid-cols-2 mt-10 mb-20 w-auto">
         <div class="w-full">
           <div
-            class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-2 lg:-mx-2 xl:-mx-2"
+            class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-2 lg:-mx-2 xl:-mx-2 h-full"
           >
             <div
-              class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-2 md:px-2 md:w-1/6 lg:my-2 lg:px-2 lg:w-1/6 xl:my-2 xl:px-2 xl:w-1/6"
+              class=" px-2 w-full overflow-hidden  sm:px-2 md:px-2 md:w-1/6 lg:px-2 lg:w-1/6 xl:px-2 xl:w-1/6"
             >
-              <div class="flex md:flex-col">
+              <div class="flex md:flex-col gap-0.5 h-full justify-between">
                 <div
                   v-for="(image, i) in images"
                   :key="i"
-                  class="bg-white rounded-lg p-2 h-30 w-30 mb-2 mx-1 md:mx-0 shadow"
+                  class="bg-white rounded-lg p-2 h-30 w-30 mx-1 md:mx-0 shadow"
                 >
                   <img
                     class="object-contain h-20 w-20 block mx-auto"
@@ -26,15 +26,13 @@
               </div>
             </div>
             <div
-              class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-2 md:px-2 md:w-5/6 lg:my-2 lg:px-2 lg:w-5/6 xl:my-2 xl:px-2 xl:w-5/6"
+              class="flex p-2 w-full h-full overflow-hidden sm:px-2 md:px-2 md:w-5/6 lg:px-2 lg:w-5/6 xl:px-2 xl:w-5/6 bg-white rounded-lg justify-center shadow"
             >
-              <div class="bg-white rounded-lg p-2 flex justify-center shadow">
                 <inner-image-zoom
                   ref="currentImage"
-                  class="block mx-auto ease-in-out duration-200 transition-all object-contain h-full rounded-lg"
+                  class="block mx-auto ease-in-out duration-200 transition-all h-full rounded-lg"
                   :src="currentImage.path"
                 ></inner-image-zoom>
-              </div>
             </div>
           </div>
         </div>
@@ -95,3 +93,12 @@ export default {
   },
 };
 </script>
+<style lang="css">
+/* @import 'vue-inner-image-zoom/lib/vue-inner-image-zoom.css'; */
+.iiz div:first-of-type{
+  height: 100%;
+}
+.iiz div picture .iiz__img{
+  height: 100%;
+}
+</style>

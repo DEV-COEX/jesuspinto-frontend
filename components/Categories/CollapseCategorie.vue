@@ -8,12 +8,8 @@
           type="text"
           placeholder="Subcategoria"
         />
-        <button
-          class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5"
-          @click="addSubCategoria"
-        >
-          Añadir
-        </button>
+       
+        <button-component title="Añadir" @accionBoton="addSubCategoria"></button-component>
       </div>
       <div class="mt-2">
         <SubCategorie

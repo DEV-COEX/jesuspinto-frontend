@@ -5,12 +5,8 @@
     <div class="container flex flex-col w-full mt-5">
       <div class="flex mb-4 items-center justify-between">
         <h1 class="text-black font-bold text-xl mr-2">Tags</h1>
-        <button
-          class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5"
-          @click="modalAgregar = true"
-        >
-          Agregar
-        </button>
+        <button-component title="Agregar"  @accionBoton="modalAgregar = true"/>
+     
       </div>
       <hr class="border rounded-full bg-gray-400 border-gray-300"/>
     </div>

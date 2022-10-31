@@ -3,7 +3,7 @@
     <Transition name="fade">
       <div
         v-if="modal"
-        class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-20"
+        class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-50"
       />
     </Transition>
     <Transition name="bounce">
@@ -101,12 +101,6 @@
               />
             </svg>
           </button>
-          <nuxt-link
-            to="/ecommerce/products/create"
-            class="bg-blue-700 border-2 border-white hover:bg-blue-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5 my-5"
-          >
-            Agregar usuario
-          </nuxt-link>
         </div>
       </div>
       <hr class="border border-gray-300" />
@@ -115,14 +109,14 @@
     <div class="container overflow-x-auto relative shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead
-          class="text-xs text-blue-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 text-center"
+          class="text-xs text-[#9B9E0B] uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 text-center"
         >
           <tr>
             <th scope="col" class="py-3 px-6">
               <input
                 ref="checkAll"
                 type="checkbox"
-                class="appearance-none checked:bg-blue-600 checked:border-transparent"
+                class="appearance-none checked:bg-[#AA8500] checked:border-transparent"
                 @click="checkAll"
               />
             </th>
@@ -149,7 +143,7 @@
                 ref="checkbox"
                 :value="user.id"
                 type="checkbox"
-                class="appearance-none checked:bg-blue-600 checked:border-transparent"
+                class="appearance-none checked:bg-[#AA8500] checked:border-transparent"
                 @click="pushUser(user.id)"
               />
             </td>

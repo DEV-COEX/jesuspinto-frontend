@@ -323,16 +323,16 @@ export default {
     previewImg() {
       const file = this.$refs.principalImg.files[0]
       const imgPreview = document.getElementById('imgPreview')
-      if (!/\.(jpe?g|png|gif|svg)$/i.test(file.name)) {
-        const extension = file.name.split('.')
+      if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
+        const extension = file?.name.split('.')
         this.$notify({
           title: 'Ups!',
           type: 'warn',
-          text: `Los archivos ${extension.at(-1).toUpperCase()} no están permitidos`,
+          text: `Los archivos ${extension?.at(-1).toUpperCase()} no están permitidos`,
         })
         this.$refs.principalImg.value = null;
-        imgPreview.src = ''
-        return
+        // imgPreview.src 
+         return
       }
       this.img = file
       const reader = new FileReader()
@@ -340,9 +340,11 @@ export default {
       reader.onload = (event) => {
         imgPreview.src = event.target.result
       }
+
       if(file){
         reader.readAsDataURL(file)
       }
+      
       
     },
     previewImages() {

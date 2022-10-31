@@ -107,21 +107,10 @@
       <Transition name="slide">
         <div
           v-show="isToggle"
-          class="
-            mr-0
-            fixed
-            md:hidden
-            top-0
-            left-0
-            h-screen
-            w-3/5
-            rounded-r-lg
-            mt-20
-            bg-white
-            z-50
-          "
+          class="mr-0 fixed md:hidden top-0 left-0 h-screen w-full rounded-r-lg mt-20 z-50 flex"
+          @click="outsideNavbar"
         >
-          <aside class="h-full w-full rounded-r shadow-2xl p-5">
+          <aside class="h-full w-3/5 rounded-r shadow-2xl p-5 bg-white flex-initial">
             <header class="flex justify-between items-center">
               <h1 class="text-blue-500">Menu</h1>
               <button
@@ -182,6 +171,11 @@ export default {
     },
     toggleAccountMenu() {
       this.isShow = !this.isShow
+    },
+    outsideNavbar(event) {
+      if (event.target.tagName === 'DIV') {
+        this.isToggle = !this.isToggle
+      }
     },
     async logout() {
       this.isLoading = true

@@ -19,8 +19,8 @@ export default {
   data: () => ({
     menu: [
       {
-        name: 'Inicio',
-        path: '/ecommerce',
+        name: 'Dashboard',
+        path: '/',
       },
       {
         name: 'Productos',

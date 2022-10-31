@@ -190,7 +190,7 @@
             class="bg-blue-100 border border-[#A7AA00] text-[#A7AA00] px-4 py-3 rounded relative mb-3"
             role="alert"
           >
-            <strong class="font-bold">{{ product.subcategory.category.name }}</strong>
+            <strong class="font-bold">{{ product.subcategory.name }}</strong>
           </div>
           <div class="flex flex-col w-full my-2">
             <label for="" class="text-sm font-bold text-gray-600 mt-3"
@@ -324,13 +324,17 @@ export default {
     files: [],
     featured: 0,
     imagenes: [],
+
+
   }),
   computed: {
     tagsComputed() {
       return this.tagsProduct
     },
-    product() {
-      return this.$store.state.product
+    product: {
+      get() {
+        return this.$store.state.product;
+      }
     },
     images: {
       get() {
@@ -415,6 +419,9 @@ export default {
   },
   async created() {
     await this.$store.dispatch('fetchProducts', this.$route.path)
+
+    // return this.$store.state.product;
+
   },
   mounted() {
     this.initFunctions()

@@ -8,7 +8,7 @@
             :show="true"
             :title="'Guardar Cambios'"
             :type="'submit'"
-           
+
           />
         </div>
         <hr class="border rounded-full gb-gray-400 border-gray-400"/>
@@ -153,7 +153,14 @@
               </div>
             </div>
             <Transition name="fade">
-              <div v-if="imagenes.length > 0" class="flex w-full mt-4">
+              <div class="flex w-full mt-4">
+                <img
+                  v-for="(imagen, index) in images"
+                  :id="`imagesPreview-${imagen.name}`"
+                  :key="index + imagenes.length"
+                  :src="`${imagen.path}`"
+                  class="p-3 w-1/4"
+                  :alt="'Imagen ' + index" />
                 <img
                   v-for="(imagen, index) in imagenes"
                   :id="`imagesPreview-${imagen.name}`"
@@ -420,8 +427,6 @@ export default {
   async created() {
     await this.$store.dispatch('fetchProducts', this.$route.path)
 
-    // return this.$store.state.product;
-
   },
   mounted() {
     this.initFunctions()
@@ -439,6 +444,7 @@ export default {
       this.imagenes = this.img
     },
     previewImages() {
+      // this.imagenes = [...this.images]
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
       array.forEach((element) => {
@@ -453,6 +459,7 @@ export default {
         }
         reader.readAsDataURL(element)
       })
+      console.log(this.imagenes)
     },
     addTag(tag) {
       if (this.tagsProduct.includes(tag)) {
@@ -504,20 +511,33 @@ export default {
     },
     async updateProduct() {
       try {
+        // {
+        //   name: this.product.name,
+        //   description: this.product.description,
+        //   price: this.product.price,
+        //   quantity: this.product.quantity,
+        //   serial: this.product.serial,
+        //   subcategory_id: parseInt(this.product.subcategory),
+        //   tags: this.product.tags_id,
+        //   featured: this.product.featured,
+        //   image: this.img,
+        // }
+          const payload = new FormData()
+          payload.append('name', this.product.name)
+          payload.append('serial', this.product.serial)
+          payload.append('description', this.product.description)
+          payload.append('price', this.product.price)
+          payload.append('quantity', this.product.quantity)
+          payload.append('subcategory_id', this.product.subcategory)
+          payload.append('image', this.img)
+          payload.append('featured', this.product.featured)
+          payload.append('tags', this.product.tags_id)
+          this.imagenes.forEach((element) => {
+            payload.append('images[]', element)
+          })
         await this.$axios.put(
-          `/api/v1/admin/product/${this.product.id}/`,
-          {
-            name: this.product.name,
-            description: this.product.description,
-            price: this.product.price,
-            quantity: this.product.quantity,
-            serial: this.product.serial,
-            subcategory_id: parseInt(this.product.subcategory),
-            tags: this.product.tags_id,
-            featured: this.product.featured,
-            image: this.img,
-          }
-        ).then(() => {
+          `/api/v1/admin/product/${this.product.id}/`, payload)
+          .then(() => {
           this.$router.push('/ecommerce/products')
         })
       } catch (error) {
@@ -531,8 +551,8 @@ export default {
     },
     async createProduct() {
       try {
+
         const payload = new FormData()
-        payload.append('image', this.img)
         payload.append('name', this.name)
         payload.append('serial', this.serial)
         payload.append('description', this.description)

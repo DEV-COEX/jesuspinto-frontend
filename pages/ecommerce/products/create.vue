@@ -8,7 +8,7 @@
             :show="true"
             :title="'Agregar'"
             :type="'submit'"
-            
+
           />
         </div>
         <hr class="border rounded-full gb-gray-400 border-gray-400"/>
@@ -424,10 +424,14 @@ export default {
         payload.append('subcategory_id', this.subcategory)
         payload.append('image', this.img)
         payload.append('featured', this.featured)
-        this.images.forEach((element) => {
-          payload.append('images[]', element)
-        })
-        await this.$axios
+        // this.images.forEach((element) => {
+        //   payload.append('images[]', element, `${element.name}`)
+        // })
+        for (let i = 0; i < this.images.length; i++) {
+          payload.append('images[]', this.images[i])
+        }
+        // return console.log('hola: ', payload.getAll('images[]'))
+          await this.$axios
           .post('/api/v1/admin/product/', payload, {
             params: {
               tags: this.tags_id,

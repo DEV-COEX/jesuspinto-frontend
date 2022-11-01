@@ -43,7 +43,7 @@
               v-if="ids > 1"
               class="bg-red-500 border-2 border-white hover:bg-red-600 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-2 my-5"
               type="button"
-              @click="deleteProducts()"
+              @click="openModalAll()"
             >
               <svg
                 class="bi bi-trash3-fill"
@@ -133,7 +133,7 @@
                 <td class="py-4 pr-4">
                   <div class="flex">
                     <nuxt-link
-                      :to="'/ecommerce/products/' + product.uuid"
+                      :to="'/ecommerce/products/' + product.id"
                       class="mr-4"
                       type="button"
                     >
@@ -266,6 +266,84 @@
           </div>
         </div>
       </Transition>
+
+      <Transition name="fade">
+        <div
+          v-if="modal1"
+          class="h-screen w-screen bg-gray-400 opacity-80 fixed top-0 left-0 z-20"
+        />
+      </Transition>
+      <Transition name="bounce">
+        <div
+          v-if="modal1"
+          id="popup-modal"
+          :class="{ show: modal1 }"
+          class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full"
+          tabindex="-1"
+        >
+          <div class="flex">
+            <div class="relative bg-white rounded-lg">
+              <button
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                data-modal-toggle="popup-modal"
+                type="button"
+                @click="closeModalAll"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    clip-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+              <div class="p-6 text-center">
+                <svg
+                  aria-hidden="true"
+                  class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  ></path>
+                </svg>
+                <h3
+                  class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
+                >
+                  Esta seguro de eliminar este producto?
+                </h3>
+                <button
+                  class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                  type="button"
+                  @click="deleteProducts()"
+                >
+                  Si, estoy seguro
+                </button>
+                <button
+                  class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                  type="button"
+                  @click="closeModalAll"
+                >
+                  No, cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -282,6 +360,7 @@ export default {
     currentPage: 1,
     arrayId: [],
     modal: false,
+    modal1: false,
     hasProducts: null,
   }),
   computed: {
@@ -308,6 +387,12 @@ export default {
     closeModal() {
       this.modal = !this.modal
       this.idProduct = 0
+    },
+    openModalAll(){
+      this.modal1 = !this.modal1
+    },
+    closeModalAll(){
+      this.modal1 = !this.modal1
     },
     async nextPage() {
       if (this.currentPage === this.pages) {
@@ -409,30 +494,37 @@ export default {
       }
     },
     async deleteProducts() {
+      this.deletingProducts = true
       try {
-        await this.idsProducts.forEach((product) => {
-          this.$axios
-            .delete(`/api/v1/admin/product/${product}`)
-            .then((response) => {
-              this.idsProducts = []
-              this.$refs.checkAll.checked = false
+        const payload = {
+          ids: this.idsProducts,
+        }
+        await this.$axios
+          .post(`/api/v1/admin/product/delete`, {
+            ...payload,
+          })
+          // await this.$axios.post(`/api/v1/admin/product/delete`, payload)
+          .then((response) => {
+            this.$notify({
+              title: 'Eliminar',
+              type: 'warning',
+              text: 'Productos eliminados!',
             })
-        })
-        this.listProducts()
-        this.$notify({
-          title: 'Eliminar',
-          type: 'warning',
-          text: 'Productos eliminados!',
-        })
+            this.closeModalAll()
+            this.listProducts()
+            this.idsProducts = []
+          })
       } catch (error) {
         this.$notify({
           title: 'Error',
           type: 'error',
           text: error?.response?.data?.error || 'Error desconocido',
         })
-        this.isLoading = false
       }
+      this.deletingProducts = false
+      this.hasProducts = null
     },
+    
     checkAll() {
       console.log('Paso por aca')
       const referencias = this.$refs.checkbox

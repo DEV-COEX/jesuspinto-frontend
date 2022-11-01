@@ -1,14 +1,15 @@
 <template>
-  <div class="slim ">
+  <div class="slim">
     <div class="flex flex-col h-screen flex-grow">
-      <header class="z-40 fixed top-0">
+      <!--      Se le agrega z-index dado a que hay un componente problemativo (InputSelectComponent) que se sobrepone sobre el navbar-->
+      <header class="z-20 fixed top-0">
         <NavbarComponent :menu="menu" class="w-full fixed top-0 left-0" />
       </header>
       <main class="mt-20">
         <Nuxt />
       </main>
     </div>
-    <notifications />
+    <client-only><notifications /></client-only>
   </div>
 </template>
 
@@ -18,8 +19,8 @@ export default {
   data: () => ({
     menu: [
       {
-        name: 'Inicio',
-        path: '/ecommerce',
+        name: 'Dashboard',
+        path: '/',
       },
       {
         name: 'Productos',

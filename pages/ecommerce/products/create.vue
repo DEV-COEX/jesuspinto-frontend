@@ -38,7 +38,7 @@
                   id="file_input_help"
                   class="mt-1 text-sm text-gray-500 dark:text-gray-300"
                 >
-                  SVG, PNG, JPG or GIF (MAX. 800x400px).
+                  SVG, PNG, JPG o GIF (MAX. 800x400px).
                 </p>
               </div>
               <div class="w-full h-full border-0">
@@ -137,15 +137,19 @@
                 </div>
               </div>
             </div>
-            <div v-if="images.length > 0" class="flex w-full mt-4 bg-gray-200 rounded-lg">
-              <img
+            <div class="">
+              <div v-if="images.length > 0" class="flex w-full mt-4  rounded-lg  bg-gray-200 overflow-x-scroll scroll-smooth hover:scroll-auto">
+                <img
                 v-for="(image, index) in images"
                 :id="`imagesPreview-${image.name}`"
                 :key="index"
                 :src="`${image}`"
-                class="p-3 w-1/4 rounded"
+                class="flex p-3 w-1/4 rounded"
                 alt="Imagen del producto"/>
             </div>
+            </div>
+             
+            
           </div>
           <div class="flex flex-col my-2">
             <label for="categories" class="text-sm font-bold text-gray-600 mt-3"
@@ -318,17 +322,44 @@ export default {
     },
     previewImg() {
       const file = this.$refs.principalImg.files[0]
+      const imgPreview = document.getElementById('imgPreview')
+      if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
+        const extension = file?.name.split('.')
+        this.$notify({
+          title: 'Ups!',
+          type: 'warn',
+          text: `Los archivos ${extension?.at(-1).toUpperCase()} no están permitidos`,
+        })
+        this.$refs.principalImg.value = null;
+        // imgPreview.src 
+         return
+      }
       this.img = file
       const reader = new FileReader()
+      
       reader.onload = (event) => {
-        document.getElementById('imgPreview').src = event.target.result
+        imgPreview.src = event.target.result
       }
-      reader.readAsDataURL(file)
+
+      if(file){
+        reader.readAsDataURL(file)
+      }
+      
+      
     },
     previewImages() {
       const files = this.$refs.images.files
       const array = Array.from(files)
       array.forEach((element) => {
+        if (!/\.(jpe?g|png|gif|svg)$/i.test(element.name)) {
+          const extension = element.name.split('.')
+          this.$notify({
+            title: 'Ups!',
+            type: 'warn',
+            text: `Los archivos ${extension.at(-1).toUpperCase()} no están permitidos`,
+          })
+          return
+        }
         this.images.push(element)
       })
       this.images.forEach((element) => {

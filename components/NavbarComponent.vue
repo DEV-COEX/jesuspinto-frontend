@@ -3,11 +3,30 @@
     <LoadingComponent v-if="isLoading" />
     <nav
       v-else
-      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
+      class="
+        bg-[#9B9E0B]
+        md:bg-white md:shadow-md
+        rounded-b-lg
+        md:rounded-lg
+        flex
+        items-center
+        md:justify-between
+        h-20
+        md:px-5
+      "
     >
       <div class="w-1/7 lg:w-auto h-full flex items-center justify-center">
         <div
-          class="bg-blue-100 rounded-lg h-full hidden md:flex md:items-center w-min max-h-10 px-3"
+          class="
+            bg-blue-100
+            rounded-lg
+            h-full
+            hidden
+            md:flex md:items-center
+            w-min
+            max-h-10
+            px-3
+          "
         >
           <a href="/" class="uppercase font-bold text-blue-400">logo</a>
         </div>
@@ -47,14 +66,14 @@
         <div class="flex items-center">
           <button
             type="button"
-            class="text-white lg:text-[#9B9E0B] mx-2 hidden lg:block"
+            class="text-white lg:text-[#9B9E0B] mx-2 hidden sm:block"
             @click="toggleAccountMenu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="currentColor"
+              fill="#9B9E0B"
               class="bi bi-person-fill"
               viewBox="0 0 16 16"
             >
@@ -65,49 +84,73 @@
           </button>
           <div
             v-if="isShow"
-            class="bg-white absolute top-full right-2 flex flex-col items-start justify-center rounded-lg px-5 py-3 shadow min-w-max"
+            class="
+              bg-white
+              absolute
+              top-full
+              right-2
+              flex flex-col
+              items-start
+              justify-center
+              rounded-lg
+              px-5
+              py-3
+              shadow
+              min-w-max
+            "
           >
-            <button v-if="user" @click="logout">Cerrar Sesion</button>
-            <nuxt-link v-else to="/login">Iniciar Sesion</nuxt-link>
+            <button v-if="user" @click="logout">Cerrar Sesión</button>
+            <nuxt-link v-else to="/login">Iniciar Sesión</nuxt-link>
           </div>
         </div>
       </div>
       <Transition name="slide">
         <div
           v-show="isToggle"
-          class="mr-0 fixed md:hidden top-0 left-0 h-screen w-full rounded-r-lg mt-20 z-50 flex"
-          @click="outsideNavbar"
+          id="menu_container"
+          class="fixed top-0 left-0 w-full h-screen z-50"
+          @click="outsideMenu"
         >
-          <aside class="h-full w-3/5 rounded-r shadow-2xl p-5 bg-white flex-initial">
-            <header class="flex justify-between items-center">
-              <h1 class="text-blue-500">Menu</h1>
-              <button
-                type="button"
-                class="text-blue-500 p-2 bg-blue-100 rounded-lg"
-                @click="toggleSidebar"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="15"
-                  height="15"
-                  fill="currentColor"
-                  class="bi bi-x-lg"
-                  viewBox="0 0 16 16"
+          <div 
+            class="mr-0 fixed md:hidden w-3/5 h-screen rounded-r-lg bg-white p-8" 
+          >
+            <aside class="w-full rounded-r">
+              <header class="flex justify-between items-center">
+                <h1 class="text-blue-500">Menú</h1>
+                <button
+                  type="button"
+                  class="text-blue-500 p-2 bg-blue-100 rounded-lg"
+                  @click="toggleSidebar"
                 >
-                  <path
-                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
-                  />
-                </svg>
-              </button>
-            </header>
-            <ul class="flex flex-col px-5 py-2">
-              <li v-for="(item, i) in menu" :key="i" class="mx-3 my-2">
-                <nuxt-link class="text-[#9B9E0B] font-bold" :to="item.path"
-                  >{{ item.name }}
-                </nuxt-link>
-              </li>
-            </ul>
-          </aside>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    fill="currentColor"
+                    class="bi bi-x-lg"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                    />
+                  </svg>
+                </button>
+              </header>
+              <ul class="flex flex-col px-5 py-2">
+                <li v-for="(item, i) in menu" :key="i" class="mx-3 my-2">
+                  <nuxt-link class="text-[#9B9E0B] font-bold" :to="item.path"
+                    >{{ item.name }}
+                  </nuxt-link>
+                </li>
+  
+                <div class="flex items-center justify-center">
+                  <button v-if="user" class="text-[#9B9E0B] absolute bottom-0 p-8" @click="logout">
+                    Cerrar Sesión
+                  </button>
+                </div>
+              </ul>
+            </aside>
+          </div>
         </div>
       </Transition>
     </nav>
@@ -140,8 +183,9 @@ export default {
     toggleAccountMenu() {
       this.isShow = !this.isShow
     },
-    outsideNavbar(event) {
-      if (event.target.tagName === 'DIV') {
+    outsideMenu(event) {
+      const menuContainer = document.getElementById('menu_container')
+      if (event.target === menuContainer) {
         this.isToggle = !this.isToggle
       }
     },

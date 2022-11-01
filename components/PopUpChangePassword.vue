@@ -76,6 +76,7 @@ export default {
           email: this.email,
         })
         .then(() => {
+          this.$store.commit('getEmailUser', this.email)
           this.$router.push('/verification');
         });
     },

@@ -5,9 +5,13 @@ export const state = () => ({
   latestProducts: [],
   likedProducts: [],
   cartProducts: [],
+  email: ''
 });
 
 export const mutations = {
+  getEmailUser(state, email){
+    state.email = email
+  },
   setProducts(state, products) {
     state.products = products;
   },

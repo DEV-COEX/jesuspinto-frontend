@@ -134,7 +134,7 @@ export default {
         this.$notify({
           title: 'Error',
           type: 'error',
-          text: error?.response?.data?.error || 'Error desconocido',
+          text: error?.response?.data?.message || 'Error desconocido',
         })
       }
     },

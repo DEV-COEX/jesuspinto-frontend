@@ -1,20 +1,14 @@
 <template>
   <div v-if="state" class="centrar fondo-modal z-50" style="left: 0">
-    <div
-      class="modal-principal sm:max-w-max w-[90%]"
-      :class="smallComponent ? 'w-auto' : 'lg:w-4/5 xl:w-4/5'"
-    >
-      <div class="separar" :class="!disabledTitle ? 'separar' : 'izquierda'">
-        <label v-if="!disabledTitle" class="font-bold text-base py-4 mx-5">{{
-          titulo
-        }}</label>
+    <div class="modal-principal">
+      <div class="separar">
+        <label class="font-bold text-base py-4 ml-5">{{ titulo }}</label>
         <button
-          type="button"
-          class="btn-cerrar text-gray-400 bg-[#F5EEFF] hover:bg-gray-200 hover:text-[#5E47D2] rounded-lg text-sm p-1.5 justify-center inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+          type=""
+          class="btn-cerrar text-gray-400 bg-transparent hover:bg-gray-200 hover:text-[#5E47D2] rounded-lg text-sm p-1.5 justify-center inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
           @click="cerrarModal"
         >
           <svg
-            class="hover:rotate-180 transition duration-500 ease-in-out"
             width="12"
             height="12"
             viewBox="0 0 12 12"
@@ -28,29 +22,16 @@
           </svg>
         </button>
       </div>
-      <div class="px-0 sm:px-6">
-        <div :class="smallComponent ? 'p-0' : 'sm:px-3'" class="p-0">
+      <div class="px-6">
+        <div class="centrar px-3 pb-8">
           <slot></slot>
         </div>
         <div
-          v-if="!smallComponent"
-          class="flex items-center justify-between border-2 border-transparent"
+          class="flex items-center justify-between border-2 border-transparent border-t-indigo-500"
         ></div>
-        <div :class="showbtn[0] && [1] ? 'flex justify-center m-4' : 'end m-4'">
-          <button
-            v-if="showbtn[0] || false"
-            class="bg-purple-700 border-2 border-white hover:bg-purple-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5"
-            @click="metodoBoton(0)"
-          >
-            {{ textbtn[0] || 'Button' }}
-          </button>
-          <button
-            v-if="showbtn[1] || false"
-            class="bg-purple-700 border-2 border-white hover:bg-purple-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5"
-            @click="metodoBoton(1)"
-          >
-            {{ textbtn[1] || 'Button' }}
-          </button>
+        <div class="end ">
+          <button-component :title=textBtn   @accionBoton="metodoBoton"/>
+        
         </div>
       </div>
     </div>
@@ -61,18 +42,6 @@
 export default {
   name: 'AppModal',
   props: {
-    smallComponent: {
-      type: Boolean,
-      default: false,
-    },
-    disabledBtn: {
-      type: Boolean,
-      default: false,
-    },
-    disabledTitle: {
-      type: Boolean,
-      default: false,
-    },
     disabled: {
       type: Boolean,
     },
@@ -80,21 +49,13 @@ export default {
       type: String,
       default: 'Modal',
     },
-    textbtn: {
-      type: Array,
-      default: () => {
-        return []
-      },
+    textBtn: {
+      type: String,
+      default: 'button',
     },
     value: {
       type: Boolean,
       default: false,
-    },
-    showbtn: {
-      type: Array,
-      default: () => {
-        return []
-      },
     },
   },
   computed: {
@@ -107,12 +68,13 @@ export default {
       },
     },
   },
+
   methods: {
     cerrarModal() {
       this.state = false
     },
-    metodoBoton(value) {
-      this.$emit('metodoBoton', value)
+    metodoBoton() {
+      this.$emit('metodoBoton')
     },
   },
 }
@@ -120,8 +82,8 @@ export default {
 
 <style scoped>
 .modal-principal {
-  background: #ffffff 0 0 no-repeat padding-box;
-  box-shadow: 0 0 6px #88888861;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 0px 6px #88888861;
   border-radius: 8px;
   /* display: grid; */
 }
@@ -136,8 +98,8 @@ export default {
 }
 
 .fondo-modal {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background-color: rgb(131 131 131 / 50%);
   position: fixed;
   top: 0;
@@ -154,5 +116,12 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0.6rem;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 12px;
+  align-self: center;
 }
 </style>

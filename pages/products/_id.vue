@@ -2,7 +2,7 @@
   <div class="lg:px-28 py-5 px-5">
     <LoadingComponent v-if="isLoading" />
     <div v-else class="block mx-auto w-auto">
-      <div class="grid grid-cols-1 xl:grid-cols-2 mt-10 mb-20 w-auto">
+      <div class="grid grid-cols-2 mt-10 mb-20 w-auto">
         <div class="w-full">
           <div
             class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-2 lg:-mx-2 xl:-mx-2 h-full"

@@ -57,7 +57,8 @@ export default {
   }),
   computed: {
     user() {
-      return this.$auth.user;
+      // return this.$auth.user;
+      return this.$store.state.email;
     },
     verified() {
       return !(
@@ -74,10 +75,11 @@ export default {
       this.resend = !this.resend;
     },
     async onSubmit() {
+      console.log({jeje: this.user})
       await this.$axios
         .post('/api/auth/verify-code', {
           code: this.verificationCode,
-          email: this.user.email,
+          email: this.user,
         })
         .then(() => {
           this.$router.push('/login');

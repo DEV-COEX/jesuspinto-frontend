@@ -97,14 +97,14 @@
           </nuxt-link>
           <button
             type="button"
-            class="text-white lg:text-[#9B9E0B] mx-2 hidden lg:block ease-in-out duration-200 "
+            class="text-white lg:text-[#9B9E0B] mx-2 hidden sm:block ease-in-out duration-200 "
             @click="toggleAcountMenu"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
               height="25"
-              fill="currentColor"
+              fill="#9B9E0B"
               class="bi bi-person-fill"
               viewBox="0 0 16 16"
             >
@@ -120,19 +120,19 @@
             <nuxt-link v-if="user" to="/profile" class="text-blue-500 font-bold"
               >Mi perfil
             </nuxt-link>
-            <button v-if="user" @click="logout">Cerrar Sesion</button>
-            <nuxt-link v-else to="/login">Iniciar Sesion</nuxt-link>
+            <button v-if="user" @click="logout">Cerrar Sesión</button>
+            <nuxt-link v-else to="/login">Iniciar Sesión</nuxt-link>
           </div>
         </div>
       </div>
       <Transition name="slide">
         <div
           v-show="isToggle"
-          class="mr-0 fixed md:hidden top-0 left-0 h-screen w-3/5 rounded-r-lg mt-20 bg-white z-50"
+          class="mr-0 fixed md:hidden top-0 left-0 h-screen w-3/5 rounded-r-lg bg-white z-50 p-8"
         >
-          <aside class="h-full w-full rounded-r shadow-2xl p-5">
+          <aside class="h-full w-full rounded-r">
             <header class="flex justify-between items-center">
-              <h1 class="text-blue-500">Menu</h1>
+              <h1 class="text-blue-500">Menú</h1>
               <button
                 type="button"
                 class="text-blue-500 p-2 bg-blue-100 rounded-lg"
@@ -163,6 +163,11 @@
                   Perfil
                 </nuxt-link>
               </li>
+               <div class="flex items-center justify-center">
+                <button v-if="user" class="text-[#9B9E0B] absolute bottom-0 p-8" @click="logout">
+                  Cerrar Sesión
+                </button>
+              </div>
             </ul>
           </aside>
         </div>

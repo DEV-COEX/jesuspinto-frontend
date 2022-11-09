@@ -38,7 +38,7 @@
               <p
                 class="break-all font-bold ease-in-out duration-200 p-2 hover:bg-blue-200 rounded-lg"
               >
-                All products
+                Todos los productos
               </p>
             </button>
             <div

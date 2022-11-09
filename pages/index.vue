@@ -6,30 +6,10 @@
         v-if="isLoading === false"
         class="flex flex-col items-center lg:px-28 lg:py-10"
       >
-        <section id="masonry" class="grid grid-cols-1 md:grid-cols-2 h-full">
-          <div
-            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center shadow-xl"
-          >
-            <img
-              src="@/static/example/image-2.png"
-              alt="Example 1"
-              class="item w-4/6"
-            />
-          </div>
-          <div
-            class="m-5 p-5 lg:bg-white rounded-2xl flex items-center justify-center shadow-xl"
-          >
-            <img
-              src="@/static/example/image-3.png"
-              alt="Example 1"
-              class="item w-full"
-            />
-          </div>
-        </section>
         <div class="w-full px-5">
           <section id="header-section" class="my-5 rounded">
             <carousel
-              :pagination-enabled="false"
+              :pagination-enabled="true"
               :navigation-enabled="false"
               :autoplay="true"
               :autoplay-hover-pause="true"

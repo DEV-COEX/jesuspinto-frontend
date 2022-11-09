@@ -71,9 +71,9 @@ export default {
       this.listCategories()
       this.category = []
     },
-    async listCategories() {
+     listCategories() {
       try {
-        await this.$axios.get('/api/v1/category/').then((response) => {
+          this.$axios.get('/api/v1/category/').then((response) => {
           this.categories = response.data
         })
       } catch (error) {

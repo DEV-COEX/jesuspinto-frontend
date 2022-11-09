@@ -524,7 +524,7 @@ export default {
       this.deletingProducts = false
       this.hasProducts = null
     },
-    
+
     checkAll() {
       console.log('Paso por aca')
       const referencias = this.$refs.checkbox

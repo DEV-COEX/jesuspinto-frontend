@@ -149,14 +149,22 @@ export default {
       })
     },
     async deleteSubCategoria() {
-      const id = this.infoToEdit.id
-      await this.$axios.delete(`api/v1/admin/subcategories/${id}`)
-      this.listCategories()
-      this.$notify({
-        title: 'Succesfull',
-        type: 'success',
-        text: 'Eliminado exitosamente',
-      })
+      try {
+        const id = this.infoToEdit.id
+        await this.$axios.delete(`api/v1/admin/subcategories/${id}`)
+        this.listCategories()
+        this.$notify({
+          title: 'Succesfull',
+          type: 'success',
+          text: 'Eliminado exitosamente',
+        })
+      } catch (error) {
+        this.$notify({
+          title: 'Error',
+          type: 'error',
+          text: error?.response?.data?.message || 'Error desconocido',
+        })
+      }
     },
   },
 }

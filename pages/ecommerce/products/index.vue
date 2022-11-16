@@ -128,7 +128,7 @@
                 </td>
                 <td class="py-4 px-6">{{ product.uuid }}</td>
                 <td class="py-4 px-6">{{ product.name }}</td>
-                <td class="py-4 px-6">{{ product.subcategory.name }}</td>
+                <td class="py-4 px-6">{{ product.subcategory.category.name }}</td>
                 <td class="py-4 px-6">{{ product.subcategory.name }}</td>
                 <td class="py-4 pr-4">
                   <div class="flex">
@@ -526,7 +526,6 @@ export default {
     },
 
     checkAll() {
-      console.log('Paso por aca')
       const referencias = this.$refs.checkbox
       if (this.$refs.checkAll.checked === true) {
         referencias.forEach((element) => {

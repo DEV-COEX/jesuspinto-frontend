@@ -526,8 +526,22 @@ export default {
           payload.append('name', this.product.name)
           payload.append('serial', this.product.serial)
           payload.append('description', this.product.description)
-          payload.append('price', this.product.price)
-          payload.append('quantity', this.product.quantity)
+          payload.append('price', this.product.price > 0
+            ? console.log('precio agregado')
+            : this.$notify({
+              title: 'Error en el precio',
+              type: 'error',
+              text: '¡El precio no puede ser negativo!',
+            })
+            )
+          payload.append('quantity', this.product.quantity >= 0
+            ? console.log('cantidad agregada')
+            : this.$notify({
+              title: 'Error en cantidad',
+              type: 'error',
+              text: '¡La cantidad no puede ser negativa!',
+            })
+            )
           payload.append('subcategory_id', this.product.subcategory)
           payload.append('image', this.img)
           payload.append('featured', this.product.featured)

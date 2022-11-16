@@ -1,17 +1,14 @@
 <template>
-  <div class="flex flex-col w-full sm:pt-15 pt-10 sm:pl-20 pl-5 sm:pr-20 py-10 pr-5 items-center">
+  <div
+    class="flex flex-col w-full sm:pt-15 pt-10 sm:pl-20 pl-5 sm:pr-20 py-10 pr-5 items-center"
+  >
     <form class="w-full" @submit.prevent="createProduct">
       <section class="block mb-10">
         <div class="flex justify-between items-center">
           <h1 class="text-2xl font-bold">Agregar producto</h1>
-          <ButtonComponent
-            :show="true"
-            :title="'Agregar'"
-            :type="'submit'"
-
-          />
+          <ButtonComponent :show="true" :title="'Agregar'" :type="'submit'" />
         </div>
-        <hr class="border rounded-full gb-gray-400 border-gray-400"/>
+        <hr class="border rounded-full gb-gray-400 border-gray-400" />
       </section>
       <div class="flex justify-center lg:flex-row flex-col">
         <div
@@ -23,7 +20,7 @@
                 <label
                   class="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
                   for="file_input"
-                >Imagen principal</label
+                  >Imagen principal</label
                 >
                 <input
                   id="file_input"
@@ -42,7 +39,7 @@
                 </p>
               </div>
               <div class="w-full h-full border-0">
-                <img id="imgPreview" class="w-full h-full"/>
+                <img id="imgPreview" class="w-full h-full" />
               </div>
             </div>
             <div class="md:w-1/2 w-full flex flex-col">
@@ -82,7 +79,7 @@
           </div>
           <div class="flex flex-col mt-5">
             <label for="" class="font-bold text-lg"
-            >Descripcion del producto</label
+              >Descripcion del producto</label
             >
             <textarea
               id=""
@@ -94,13 +91,15 @@
             ></textarea>
           </div>
         </div>
-        <div class="lg:w-2/5 w-full lg:mt-0 bg-white rounded-xl p-10  shadow-2xl">
+        <div
+          class="lg:w-2/5 w-full lg:mt-0 bg-white rounded-xl p-10 shadow-2xl"
+        >
           <div class="flex flex-col">
             <div
               class="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between w-full items-center"
             >
               <label for="" class="font-bold text-xl w-3/5"
-              >Imagenes del producto
+                >Imagenes del producto
               </label>
               <div
                 class="flex bg-blue-600 w-10 h-10 rounded-lg items-center justify-center"
@@ -138,22 +137,24 @@
               </div>
             </div>
             <div class="">
-              <div v-if="images.length > 0" class="flex w-full mt-4  rounded-lg  bg-gray-200 overflow-x-scroll scroll-smooth hover:scroll-auto">
+              <div
+                v-if="images.length > 0"
+                class="flex w-full mt-4 rounded-lg bg-gray-200 overflow-x-scroll scroll-smooth hover:scroll-auto"
+              >
                 <img
-                v-for="(image, index) in images"
-                :id="`imagesPreview-${image.name}`"
-                :key="index"
-                :src="`${image}`"
-                class="flex p-3 w-1/4 rounded"
-                alt="Imagen del producto"/>
+                  v-for="(image, index) in images"
+                  :id="`imagesPreview-${image.name}`"
+                  :key="index"
+                  :src="`${image}`"
+                  class="flex p-3 w-1/4 rounded"
+                  alt="Imagen del producto"
+                />
+              </div>
             </div>
-            </div>
-             
-            
           </div>
           <div class="flex flex-col my-2">
             <label for="categories" class="text-sm font-bold text-gray-600 mt-3"
-            >Categoría</label
+              >Categoría</label
             >
             <select
               id="categories"
@@ -174,7 +175,7 @@
           </div>
           <div class="flex flex-col my-2">
             <label for="" class="text-sm font-bold text-gray-600 mt-3"
-            >Subcategoría</label
+              >Subcategoría</label
             >
             <select
               id="subcategories"
@@ -194,8 +195,10 @@
           </div>
           <div class="flex flex-col">
             <div class="flex flex-col my-2">
-              <label for="categories" class="text-sm font-bold text-gray-600 mt-3"
-              >Tags</label
+              <label
+                for="categories"
+                class="text-sm font-bold text-gray-600 mt-3"
+                >Tags</label
               >
               <select
                 id="tags"
@@ -219,7 +222,7 @@
                 v-if="tagsProduct.length > 0"
                 for="tags"
                 class="text-sm font-bold text-gray-600 mt-3"
-              >Listado de tags</label
+                >Listado de tags</label
               >
               <div
                 v-for="data in tagsComputed"
@@ -232,17 +235,17 @@
                   class="absolute top-0 bottom-0 right-0 px-4 py-3"
                   @click="removeTag(data)"
                 >
-                <svg
-                  class="fill-current h-6 w-6 text-blue-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <title>Eliminar</title>
-                  <path
-                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
-                  />
-                </svg>
-              </span>
+                  <svg
+                    class="fill-current h-6 w-6 text-blue-500"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <title>Eliminar</title>
+                    <path
+                      d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+                    />
+                  </svg>
+                </span>
               </div>
             </div>
             <div class="flex flex-col mb-2">
@@ -253,7 +256,7 @@
                     isFeatured === 1
                       ? 'bg-black text-white'
                       : 'text-[black] hover:bg-black hover:text-white focus:ring-black border-black'
-                      "
+                  "
                   class="focus:outline-none border-2 border-black mx-2 hover:bg-black font-medium rounded-lg text-sm md:px-5 px-2 py-2.5 mb-2 ease-in-out duration-200"
                   :show="true"
                   :type="'button'"
@@ -328,24 +331,24 @@ export default {
         this.$notify({
           title: 'Ups!',
           type: 'warn',
-          text: `Los archivos ${extension?.at(-1).toUpperCase()} no están permitidos`,
+          text: `Los archivos ${extension
+            ?.at(-1)
+            .toUpperCase()} no están permitidos`,
         })
-        this.$refs.principalImg.value = null;
-        // imgPreview.src 
-         return
+        this.$refs.principalImg.value = null
+        // imgPreview.src
+        return
       }
       this.img = file
       const reader = new FileReader()
-      
+
       reader.onload = (event) => {
         imgPreview.src = event.target.result
       }
 
-      if(file){
+      if (file) {
         reader.readAsDataURL(file)
       }
-      
-      
     },
     previewImages() {
       const files = this.$refs.images.files
@@ -356,7 +359,9 @@ export default {
           this.$notify({
             title: 'Ups!',
             type: 'warn',
-            text: `Los archivos ${extension.at(-1).toUpperCase()} no están permitidos`,
+            text: `Los archivos ${extension
+              .at(-1)
+              .toUpperCase()} no están permitidos`,
           })
           return
         }
@@ -390,27 +395,24 @@ export default {
       this.tags_id = this.tags_id.filter((item) => item !== tag.id)
     },
     async listTags() {
-      const {data} = await this.$axios.get('/api/v1/tag/')
+      const { data } = await this.$axios.get('/api/v1/tag/')
       this.tags = data
     },
     async listCategories() {
-      const {data} = await this.$axios.get('/api/v1/category/')
+      const { data } = await this.$axios.get('/api/v1/category/')
       this.categories = data
     },
     async listSubCategories() {
-      const {data} = await this.$axios.get(
-        '/api/v1/category/subcategories',
-        {
-          params: {
-            category_id: this.category,
-          },
-        }
-      )
+      const { data } = await this.$axios.get('/api/v1/category/subcategories', {
+        params: {
+          category_id: this.category,
+        },
+      })
       this.subcategories = data.subcategories
     },
     featuredProduct(state) {
       this.featured = state
-      this.onFeatured();
+      this.onFeatured()
     },
     async createProduct() {
       try {
@@ -419,8 +421,26 @@ export default {
         payload.append('name', this.name)
         payload.append('serial', this.serial)
         payload.append('description', this.description)
-        payload.append('price', this.price)
-        payload.append('quantity', this.quantity)
+        payload.append(
+          'price',
+          this.price > 0
+            ? console.log('precio agregado')
+            : this.$notify({
+              title: 'Error en el precio',
+              type: 'error',
+              text: '¡El precio no puede ser negativo!',
+            })
+        )
+        payload.append(
+          'quantity',
+          this.quantity > 0
+            ? console.log('cantidad agregada')
+            : this.$notify({
+              title: 'Error en cantidad',
+              type: 'error',
+              text: '¡La cantidad no puede ser negativa!',
+            })
+        )
         payload.append('subcategory_id', this.subcategory)
         payload.append('image', this.img)
         payload.append('featured', this.featured)
@@ -431,7 +451,7 @@ export default {
           payload.append('images[]', this.images[i])
         }
         // return console.log('hola: ', payload.getAll('images[]'))
-          await this.$axios
+        await this.$axios
           .post('/api/v1/admin/product/', payload, {
             params: {
               tags: this.tags_id,

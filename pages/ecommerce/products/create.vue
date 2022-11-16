@@ -322,6 +322,7 @@ export default {
     },
     previewImg() {
       const file = this.$refs.principalImg.files[0]
+      console.log(file, 'a')
       const imgPreview = document.getElementById('imgPreview')
       if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
         const extension = file?.name.split('.')
@@ -360,6 +361,15 @@ export default {
           })
           return
         }
+        if(this.images.filter(image => image.name === element.name).length > 0){
+          this.$notify({
+            title: 'Ups!',
+            type: 'warn',
+            text: "item repetido",
+          })
+          return
+        }
+
         this.images.push(element)
       })
       this.images.forEach((element) => {

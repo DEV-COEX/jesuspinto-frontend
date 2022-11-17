@@ -480,7 +480,7 @@ export default {
     },
     async listTags() {
       const {data} = await this.$axios.get('/api/v1/tag/')
-      this.tags = data.tags
+      this.tags = data
     },
     async listCategories() {
       const {data} = await this.$axios.get('/api/v1/category/')

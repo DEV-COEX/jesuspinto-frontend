@@ -31,7 +31,7 @@
                   class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   aria-describedby="file_input_help"
                   type="file"
-                  @change="previewImg"
+                  @change="previewImgv2"
                 />
                 <p
                   id="file_input_help"
@@ -212,11 +212,11 @@
             >
               <option value="0" disabled>Seleccione una subcategoria</option>
               <option
-                v-for="data in subcategories"
-                :key="data.id"
-                :value="data.id"
+                v-for="subcategori in subcategories"
+                :key="subcategori.id"
+                :value="subcategori.id"
               >
-                {{ data.name }}
+                {{ subcategori.name }}
               </option>
             </select>
           </div>
@@ -256,15 +256,15 @@
             >
 
             <div
-              v-for="data in tagsComputed"
-              :key="data.id"
+              v-for="tagComputed in tagsComputed"
+              :key="tagComputed.id"
               class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
               role="alert"
             >
-              <strong class="font-bold">{{ data.name }}</strong>
+              <strong class="font-bold">{{ tagComputed.name }}</strong>
               <span
                 class="absolute top-0 bottom-0 right-0 px-4 py-3"
-                @click="removeTag(data)"
+                @click="removeTag(tagComputed)"
               >
                 <svg
                   class="fill-current h-6 w-6 text-blue-500"
@@ -442,6 +442,33 @@ export default {
       reader.readAsDataURL(file)
       this.imagenes.shift()
       this.imagenes = this.img
+    },
+    previewImgv2(){
+      const file = this.$refs.principalImg.files[0]
+      if(typeof file === "undefined") {
+        document.getElementById("imgPreview").src = this.images[0].path
+        return
+      }
+      if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
+        const extension = file?.name.split('.')
+        this.$notify({
+          title: 'Ups!',
+          type: 'warn',
+          text: `Los archivos ${extension?.at(-1).toUpperCase()} no están permitidos`,
+        })
+        this.$refs.principalImg.value = null;
+        return
+      }
+      this.img = file
+      const reader = new FileReader()
+      
+      reader.onload = (event) => {
+        document.getElementById('imgPreview').src = event.target.result
+      }
+    
+      if(file){
+        reader.readAsDataURL(file)
+      }
     },
     previewImages() {
       // this.imagenes = [...this.images]

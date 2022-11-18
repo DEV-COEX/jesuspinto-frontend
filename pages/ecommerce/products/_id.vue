@@ -555,16 +555,19 @@ export default {
           payload.append('description', this.product.description)
           payload.append('price', this.product.price)
           payload.append('quantity', this.product.quantity)
-          payload.append('subcategory_id', this.product.subcategory)
+          payload.append('subcategory_id', this.product.subcategory_id)
           payload.append('image', this.img)
           payload.append('featured', this.product.featured)
           payload.append('tags', this.product.tags_id)
           this.imagenes.forEach((element) => {
             payload.append('images[]', element)
           })
-        await this.$axios.put(
-          `/api/v1/admin/product/${this.product.id}/`, payload)
-          .then(() => {
+        await this.$axios({
+          method: "post",
+          url: `/api/v1/admin/product/${this.product.id}/`,
+          data: payload,
+          headers: { "Content-Type": "multipart/form-data" },
+        }).then(() => {
           this.$router.push('/ecommerce/products')
         })
       } catch (error) {

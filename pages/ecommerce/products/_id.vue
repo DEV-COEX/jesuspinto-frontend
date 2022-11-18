@@ -446,7 +446,7 @@ export default {
     previewImgv2(){
       const file = this.$refs.principalImg.files[0]
       if(typeof file === "undefined") {
-        document.getElementById("imgPreview").src = this.images[0].path
+        // document.getElementById("imgPreview").src = this.images[0].path
         return
       }
       if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {

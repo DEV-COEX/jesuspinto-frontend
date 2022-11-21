@@ -7,7 +7,7 @@
         <h1 class="text-black font-bold text-xl mr-2">
           Códigos de promociones
         </h1>
-        <button-component title="Agregar"  @accionBoton="modalAgregar = true"/>
+        <button-component title="Agregar" @accionBoton="modalAgregar = true" />
       </div>
       <hr class="border rounded-full bg-gray-400 border-gray-400" />
     </div>
@@ -17,7 +17,7 @@
         :key="promo.id"
         :nombre="promo.code"
         :discount="promo.discount"
-        :active = "promo.active"
+        :active="promo.active"
         :promo="promo"
         @listPromos="listPromos"
       />
@@ -94,17 +94,27 @@ export default {
           active: this.active,
         }
 
-        await this.$axios.post('/api/v1/admin/prom-code/', payload).then((response) => {
-            this.$notify({
-              title: 'Registrar',
-              type: 'success',
-              text: 'Promoción registrada!',
+        if (this.discount >= 1 && this.discount <= 100) {
+          await this.$axios
+            .post('/api/v1/admin/prom-code/', payload)
+            .then((response) => {
+              this.$notify({
+                title: 'Registrar',
+                type: 'success',
+                text: 'Promoción registrada!',
+              })
+              this.code = ''
+              this.discount = 0
+              this.listPromos()
+              this.modalAgregar = false
             })
-            this.code = ''
-            this.discount = 0
-            this.listPromos()
-            this.modalAgregar = false
+        } else {
+          this.$notify({
+            title: 'Error al crear',
+            type: 'warn',
+            text: 'Porcentaje fuera de rango!',
           })
+        }
       } catch (error) {}
     },
   },

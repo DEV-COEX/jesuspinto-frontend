@@ -555,7 +555,7 @@ export default {
           payload.append('description', this.product.description)
           payload.append('price', this.product.price)
           payload.append('quantity', this.product.quantity)
-          payload.append('subcategory_id', this.product.subcategory_id)
+          payload.append('subcategory_id', this.product.subcategory)
           payload.append('image', this.img)
           payload.append('img_id', this.images[0].id)
           payload.append('product_id', this.product.id)

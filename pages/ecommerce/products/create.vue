@@ -322,7 +322,6 @@ export default {
     },
     previewImg() {
       const file = this.$refs.principalImg.files[0]
-      console.log(file, 'a')
       const imgPreview = document.getElementById('imgPreview')
       if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
         const extension = file?.name.split('.')

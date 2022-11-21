@@ -360,6 +360,15 @@ export default {
           })
           return
         }
+        if(this.images.filter(image => image.name === element.name).length > 0){
+          this.$notify({
+            title: 'Ups!',
+            type: 'warn',
+            text: "item repetido",
+          })
+          return
+        }
+
         this.images.push(element)
       })
       this.images.forEach((element) => {

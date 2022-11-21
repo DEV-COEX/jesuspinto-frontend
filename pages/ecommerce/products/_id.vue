@@ -43,7 +43,7 @@
               <div v-if="img">
                 <img id="imgPreview">
               </div>
-              <div v-if="images && img.length === 0" class="w-full h-full border-0">
+              <div v-if="images && img.length === 0" class="w-full h-full border-0 ">
                 <img
                   class="w-full h-full"
                   alt="Previsualizacion"
@@ -153,7 +153,7 @@
               </div>
             </div>
             <Transition name="fade">
-              <div class="flex w-full mt-4">
+              <div class="flex w-full mt-4 overflow-x-scroll">
                 <img
                   v-for="(imagen, index) in images?.slice(1)"
                   :id="`imagesPreview-${imagen.name}`"
@@ -197,7 +197,7 @@
             class="bg-blue-100 border border-[#A7AA00] text-[#A7AA00] px-4 py-3 rounded relative mb-3"
             role="alert"
           >
-            <strong class="font-bold">{{ product.subcategory.name }}</strong>
+            <strong class="font-bold">{{ product.subcategory.category.name }}</strong>
           </div>
           <div class="flex flex-col w-full my-2">
             <label for="" class="text-sm font-bold text-gray-600 mt-3"
@@ -559,11 +559,16 @@ export default {
           payload.append('quantity', this.product.quantity)
           payload.append('subcategory_id', this.product.subcategory_id)
           payload.append('image', this.img)
+          payload.append('img_id', this.images[0].id)
+          payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
           payload.append('tags', this.product.tags_id)
-          this.imagenes.forEach((element) => {
+          console.log(this.img)
+            if(this.imagenes[0]){
+            this.imagenes.forEach((element) => {
             payload.append('images[]', element)
-          })
+          })}
+
         await this.$axios({
           method: "post",
           url: `/api/v1/admin/product/${this.product.id}/`,
@@ -576,7 +581,7 @@ export default {
         this.$notify({
           title: 'Error',
           type: 'error',
-          text: error?.response?.data?.error || 'Error desconocido',
+          text: error?.response?.data?.error ||error,
         })
       }
 

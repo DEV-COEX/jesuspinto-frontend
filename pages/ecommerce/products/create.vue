@@ -39,7 +39,7 @@
                 </p>
               </div>
               <div class="w-full h-full border-0">
-                <img id="imgPreview" class="w-full h-full" />
+                <img v-if="currentImg" id="imgPreview" class="w-full h-full"/>
               </div>
             </div>
             <div class="md:w-1/2 w-full flex flex-col">
@@ -292,6 +292,7 @@ export default {
     description: '',
     category: 0,
     categories: [],
+    currentImg:true,
     subcategory: 0,
     subcategories: [],
     tagsProduct: [],
@@ -324,8 +325,14 @@ export default {
       }
     },
     previewImg() {
+      this.currentImg = true
       const file = this.$refs.principalImg.files[0]
-      const imgPreview = document.getElementById('imgPreview')
+      // const imgPreview = document.getElementById('imgPreview')
+      if(typeof file === "undefined"){
+        this.currentImg = false
+        return
+      }
+      
       if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
         const extension = file?.name.split('.')
         this.$notify({
@@ -335,18 +342,18 @@ export default {
             ?.at(-1)
             .toUpperCase()} no están permitidos`,
         })
-        this.$refs.principalImg.value = null
-        // imgPreview.src
+        this.$refs.principalImg.value = null;
         return
       }
       this.img = file
       const reader = new FileReader()
 
       reader.onload = (event) => {
-        imgPreview.src = event.target.result
+        this.currentImg = true
+        document.getElementById('imgPreview').src = event.target.result
       }
-
-      if (file) {
+    
+      if(file){
         reader.readAsDataURL(file)
       }
     },

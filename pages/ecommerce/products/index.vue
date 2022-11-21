@@ -127,8 +127,8 @@
                   </div>
                 </td>
                 <td class="py-4 px-6">{{ product.uuid }}</td>
-                <td class="py-4 px-6 truncate">{{ product.name }}</td>
-                <td class="py-4 px-6">{{ product.subcategory.name }}</td>
+                <td class="py-4 px-6">{{ product.name }}</td>
+                <td class="py-4 px-6">{{ product.subcategory.category.name }}</td>
                 <td class="py-4 px-6">{{ product.subcategory.name }}</td>
                 <td class="py-4 pr-4">
                   <div class="flex">

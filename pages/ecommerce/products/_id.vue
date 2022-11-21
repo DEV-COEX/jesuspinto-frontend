@@ -31,7 +31,7 @@
                   class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                   aria-describedby="file_input_help"
                   type="file"
-                  @change="previewImg"
+                  @change="previewImgv2"
                 />
                 <p
                   id="file_input_help"
@@ -43,7 +43,7 @@
               <div v-if="img">
                 <img id="imgPreview">
               </div>
-              <div v-if="images && img.length === 0" class="w-full h-full border-0">
+              <div v-if="images && img.length === 0" class="w-full h-full border-0 ">
                 <img
                   class="w-full h-full"
                   alt="Previsualizacion"
@@ -153,16 +153,16 @@
               </div>
             </div>
             <Transition name="fade">
-              <div class="flex w-full mt-4">
+              <div class="flex w-full mt-4 overflow-x-scroll">
                 <img
-                  v-for="(imagen, index) in images"
+                  v-for="(imagen, index) in images?.slice(1)"
                   :id="`imagesPreview-${imagen.name}`"
                   :key="index + imagenes.length"
                   :src="`${imagen.path}`"
                   class="p-3 w-1/4"
                   :alt="'Imagen ' + index" />
                 <img
-                  v-for="(imagen, index) in imagenes"
+                  v-for="(imagen, index) in imagenes.slice(0)"
                   :id="`imagesPreview-${imagen.name}`"
                   :key="index"
                   :src="`${imagen}`"
@@ -197,7 +197,7 @@
             class="bg-blue-100 border border-[#A7AA00] text-[#A7AA00] px-4 py-3 rounded relative mb-3"
             role="alert"
           >
-            <strong class="font-bold">{{ product.subcategory.name }}</strong>
+            <strong class="font-bold">{{ product.subcategory.category.name }}</strong>
           </div>
           <div class="flex flex-col w-full my-2">
             <label for="" class="text-sm font-bold text-gray-600 mt-3"
@@ -212,11 +212,11 @@
             >
               <option value="0" disabled>Seleccione una subcategoria</option>
               <option
-                v-for="data in subcategories"
-                :key="data.id"
-                :value="data.id"
+                v-for="subcategori in subcategories"
+                :key="subcategori.id"
+                :value="subcategori.id"
               >
-                {{ data.name }}
+                {{ subcategori.name }}
               </option>
             </select>
           </div>
@@ -256,15 +256,15 @@
             >
 
             <div
-              v-for="data in tagsComputed"
-              :key="data.id"
+              v-for="tagComputed in tagsComputed"
+              :key="tagComputed.id"
               class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
               role="alert"
             >
-              <strong class="font-bold">{{ data.name }}</strong>
+              <strong class="font-bold">{{ tagComputed.name }}</strong>
               <span
                 class="absolute top-0 bottom-0 right-0 px-4 py-3"
-                @click="removeTag(data)"
+                @click="removeTag(tagComputed)"
               >
                 <svg
                   class="fill-current h-6 w-6 text-blue-500"
@@ -345,6 +345,8 @@ export default {
     },
     images: {
       get() {
+        console.trace(this.$store.state)
+        console.trace(this.$store)
         return this.$store.state.product.images
       },
       set(value) {
@@ -443,6 +445,33 @@ export default {
       this.imagenes.shift()
       this.imagenes = this.img
     },
+    previewImgv2(){
+      const file = this.$refs.principalImg.files[0]
+      if(typeof file === "undefined") {
+        // document.getElementById("imgPreview").src = this.images[0].path
+        return
+      }
+      if (!/\.(jpe?g|png|gif|svg)$/i.test(file?.name)) {
+        const extension = file?.name.split('.')
+        this.$notify({
+          title: 'Ups!',
+          type: 'warn',
+          text: `Los archivos ${extension?.at(-1).toUpperCase()} no están permitidos`,
+        })
+        this.$refs.principalImg.value = null;
+        return
+      }
+      this.img = file
+      const reader = new FileReader()
+      
+      reader.onload = (event) => {
+        document.getElementById('imgPreview').src = event.target.result
+      }
+    
+      if(file){
+        reader.readAsDataURL(file)
+      }
+    },
     previewImages() {
       // this.imagenes = [...this.images]
       const files = this.$refs.imagenes.files
@@ -480,7 +509,7 @@ export default {
     },
     async listTags() {
       const {data} = await this.$axios.get('/api/v1/tag/')
-      this.tags = data.tags
+      this.tags = data
     },
     async listCategories() {
       const {data} = await this.$axios.get('/api/v1/category/')
@@ -526,39 +555,33 @@ export default {
           payload.append('name', this.product.name)
           payload.append('serial', this.product.serial)
           payload.append('description', this.product.description)
-          payload.append('price', this.product.price > 0
-            ? console.log('precio agregado')
-            : this.$notify({
-              title: 'Error en el precio',
-              type: 'error',
-              text: '¡El precio no puede ser negativo!',
-            })
-            )
-          payload.append('quantity', this.product.quantity >= 0
-            ? console.log('cantidad agregada')
-            : this.$notify({
-              title: 'Error en cantidad',
-              type: 'error',
-              text: '¡La cantidad no puede ser negativa!',
-            })
-            )
+          payload.append('price', this.product.price)
+          payload.append('quantity', this.product.quantity)
           payload.append('subcategory_id', this.product.subcategory)
           payload.append('image', this.img)
+          payload.append('img_id', this.images[0].id)
+          payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
           payload.append('tags', this.product.tags_id)
-          this.imagenes.forEach((element) => {
+          console.log(this.img)
+            if(this.imagenes[0]){
+            this.imagenes.forEach((element) => {
             payload.append('images[]', element)
-          })
-        await this.$axios.put(
-          `/api/v1/admin/product/${this.product.id}/`, payload)
-          .then(() => {
+          })}
+
+        await this.$axios({
+          method: "post",
+          url: `/api/v1/admin/product/${this.product.id}/`,
+          data: payload,
+          headers: { "Content-Type": "multipart/form-data" },
+        }).then(() => {
           this.$router.push('/ecommerce/products')
         })
       } catch (error) {
         this.$notify({
           title: 'Error',
           type: 'error',
-          text: error?.response?.data?.error || 'Error desconocido',
+          text: error?.response?.data?.error ||error,
         })
       }
 

@@ -155,14 +155,14 @@
             <Transition name="fade">
               <div class="flex w-full mt-4 overflow-x-scroll">
                 <img
-                  v-for="(imagen, index) in images"
+                  v-for="(imagen, index) in images?.slice(1)"
                   :id="`imagesPreview-${imagen.name}`"
                   :key="index + imagenes.length"
                   :src="`${imagen.path}`"
                   class="p-3 w-1/4"
                   :alt="'Imagen ' + index" />
                 <img
-                  v-for="(imagen, index) in imagenes"
+                  v-for="(imagen, index) in imagenes.slice(0)"
                   :id="`imagesPreview-${imagen.name}`"
                   :key="index"
                   :src="`${imagen}`"
@@ -345,6 +345,8 @@ export default {
     },
     images: {
       get() {
+        console.trace(this.$store.state)
+        console.trace(this.$store)
         return this.$store.state.product.images
       },
       set(value) {

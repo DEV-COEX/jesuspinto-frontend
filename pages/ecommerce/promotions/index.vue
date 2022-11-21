@@ -94,7 +94,7 @@ export default {
           active: this.active,
         }
 
-        if (this.discount >= 0 && this.discount <= 100) {
+        if (this.discount >= 1 && this.discount <= 100) {
           await this.$axios
             .post('/api/v1/admin/prom-code/', payload)
             .then((response) => {

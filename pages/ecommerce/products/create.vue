@@ -440,7 +440,7 @@ export default {
         payload.append(
           'price',
           this.price > 0
-            ? console.log('precio agregado')
+            ? this.price
             : this.$notify({
               title: 'Error en el precio',
               type: 'error',
@@ -450,7 +450,7 @@ export default {
         payload.append(
           'quantity',
           this.quantity > 0
-            ? console.log('cantidad agregada')
+            ? this.quantity
             : this.$notify({
               title: 'Error en cantidad',
               type: 'error',

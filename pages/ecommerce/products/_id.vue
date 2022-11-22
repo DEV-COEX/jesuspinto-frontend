@@ -247,16 +247,15 @@
                 {{ data.name }}
               </option>
             </select>
-
             <label
-              v-if="tagsProduct.length > 0"
+              v-if="tagsByProduct?.length > 0"
               for="tags"
               class="text-sm font-bold text-gray-600 mt-3"
             >Listado de tags</label
             >
 
             <div
-              v-for="tagComputed in tagsComputed"
+              v-for="tagComputed in tagsByProduct"
               :key="tagComputed.id"
               class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
               role="alert"
@@ -325,12 +324,12 @@ export default {
     categories: [],
     subcategories: [],
     tagsProduct: [],
-    tags: [],
+    tags: [], // todos los tags creados
     tags_id: [],
     img: [],
     files: [],
     featured: 0,
-    imagenes: [],
+    imagenes: [], 
 
 
   }),
@@ -340,13 +339,23 @@ export default {
     },
     product: {
       get() {
+        console.log(this.$store.state.product)
         return this.$store.state.product;
+      }
+    },
+    tagsByProduct:{ // Array para contener los tags que tiene el producto
+      get(){
+        return this.$store.state.product.tags
+      },
+      set(value){
+        this.$store.commit("setProperty",{
+          property:"tags",
+          value,
+        })
       }
     },
     images: {
       get() {
-        console.trace(this.$store.state)
-        console.trace(this.$store)
         return this.$store.state.product.images
       },
       set(value) {
@@ -502,6 +511,9 @@ export default {
     removeTag(tag) {
       this.tagsProduct = this.tagsProduct.filter((item) => item.id !== tag.id)
       this.tags_id = this.tags_id.filter((item) => item !== tag.id)
+    },
+    removeTagv2(tag){ // Metodo para eliminar tags version 2
+      this.tagsByProduct = this.tagsByProduct?.filter((item) => item.id !== tag.id) // se hace referencia a la propiedad computada
     },
     initFunctions() {
       this.listCategories()

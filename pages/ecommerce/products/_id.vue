@@ -263,7 +263,7 @@
               <strong class="font-bold">{{ tagComputed.name }}</strong>
               <span
                 class="absolute top-0 bottom-0 right-0 px-4 py-3"
-                @click="removeTag(tagComputed)"
+                @click="removeTagv2(tagComputed)"
               >
                 <svg
                   class="fill-current h-6 w-6 text-blue-500"

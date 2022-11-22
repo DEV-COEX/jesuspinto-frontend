@@ -437,6 +437,9 @@ export default {
   },
   async created() {
     await this.$store.dispatch('fetchProducts', this.$route.path)
+    this.category = this.product.subcategory.category.id
+    this.subcategory = this.product.subcategory.id
+    // this.listSubCategories()
 
   },
   mounted() {
@@ -482,7 +485,6 @@ export default {
       }
     },
     previewImages() {
-      // this.imagenes = [...this.images]
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
       array.forEach((element) => {
@@ -497,7 +499,6 @@ export default {
         }
         reader.readAsDataURL(element)
       })
-      console.log(this.imagenes)
     },
     addTag(tag) {
       if (this.tagsProduct.includes(tag)) {
@@ -517,6 +518,7 @@ export default {
     },
     initFunctions() {
       this.listCategories()
+      this.listSubCategories()
       this.listTags()
     },
     async listTags() {
@@ -546,37 +548,25 @@ export default {
     },
     updateSubcategory() {
       this.$store.commit('setProperty', {
-        property: 'subcategory_id',
-        value: this.subcategory,
+        property: 'subcategory',
+        value: this.subcategory.id,
       })
     },
     async updateProduct() {
       try {
-        // {
-        //   name: this.product.name,
-        //   description: this.product.description,
-        //   price: this.product.price,
-        //   quantity: this.product.quantity,
-        //   serial: this.product.serial,
-        //   subcategory_id: parseInt(this.product.subcategory),
-        //   tags: this.product.tags_id,
-        //   featured: this.product.featured,
-        //   image: this.img,
-        // }
           const payload = new FormData()
           payload.append('name', this.product.name)
           payload.append('serial', this.product.serial)
           payload.append('description', this.product.description)
           payload.append('price', this.product.price)
           payload.append('quantity', this.product.quantity)
-          payload.append('subcategory_id', this.product.subcategory)
+          payload.append('subcategory_id', this.subcategory)
           payload.append('image', this.img)
           payload.append('img_id', this.images[0].id)
           payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
           payload.append('tags', this.product.tags_id)
-          console.log(this.img)
-            if(this.imagenes[0]){
+          if(this.imagenes[0]){
             this.imagenes.forEach((element) => {
             payload.append('images[]', element)
           })}

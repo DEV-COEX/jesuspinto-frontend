@@ -24,12 +24,14 @@
       </div>
       <div v-else-if="!hasProducts" class="loadingElements items-center justify-center w-full">
         <div
-          class="md:w-1/2 flex flex-col items-center text-purple-700 p-10 rounded-2xl">
+          class="md:w-1/2 flex flex-col items-center text-black-700 p-10 rounded-2xl">
           <img alt="" class="w-1/6 xl:w-1/12 fill-purple-600" src="@/static/icons/thinking.svg">
-          <span class="lg:text-xl font-medium mt-1 text-center">Parece que aun no tienes productos</span>
+          <span class="lg:text-xl font-medium mt-1 text-center"
+          >Parece que aun no tienes productos</span
+        >
           <nuxt-link
-            class="bg-700 border-2 border-white hover:bg-purple-700 ease-in-out duration-75 text-white py-2 rounded-xl w-max px-5 mt-4"
-            to="/ecommerce/products/create"
+          class="boton border border-black hover:border-white ease-in-out duration-500 text-black hover:text-white py-2 rounded-xl w-max px-5 my-5 hover:bg-[#A7AA00]"
+          to="/ecommerce/products/create"
           >
             Agregar producto
           </nuxt-link>

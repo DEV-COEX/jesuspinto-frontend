@@ -339,7 +339,6 @@ export default {
     },
     product: {
       get() {
-        console.log(this.$store.state.product)
         return this.$store.state.product;
       }
     },
@@ -565,7 +564,10 @@ export default {
           payload.append('img_id', this.images[0].id)
           payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
-          payload.append('tags', this.product.tags_id)
+          this.tags_id.forEach((element)=>{
+            payload.append('tags', element)
+           })
+           
           if(this.imagenes[0]){
             this.imagenes.forEach((element) => {
             payload.append('images[]', element)
@@ -585,6 +587,7 @@ export default {
           type: 'error',
           text: error?.response?.data?.error ||error,
         })
+        console.log(error)
       }
 
     },

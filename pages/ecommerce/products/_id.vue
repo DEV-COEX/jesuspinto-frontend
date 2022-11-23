@@ -438,7 +438,7 @@ export default {
     await this.$store.dispatch('fetchProducts', this.$route.path)
     this.category = this.product.subcategory.category.id
     this.subcategory = this.product.subcategory.id
-    // this.listSubCategories()
+    await this.listSubCategories()
 
   },
   mounted() {
@@ -487,6 +487,14 @@ export default {
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
       array.forEach((element) => {
+        if(this.imagenes.filter(image => image.name === element.name).length > 0){
+          this.$notify({
+            title: 'Ups!',
+            type: 'warn',
+            text: "item repetido",
+          })
+          return
+        }
         this.imagenes.push(element)
       })
       this.imagenes.forEach((element) => {

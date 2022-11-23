@@ -247,16 +247,15 @@
                 {{ data.name }}
               </option>
             </select>
-
             <label
-              v-if="tagsProduct.length > 0"
+              v-if="tagsByProduct?.length > 0"
               for="tags"
               class="text-sm font-bold text-gray-600 mt-3"
             >Listado de tags</label
             >
 
             <div
-              v-for="tagComputed in tagsComputed"
+              v-for="tagComputed in tagsByProduct"
               :key="tagComputed.id"
               class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative mb-3"
               role="alert"
@@ -264,7 +263,7 @@
               <strong class="font-bold">{{ tagComputed.name }}</strong>
               <span
                 class="absolute top-0 bottom-0 right-0 px-4 py-3"
-                @click="removeTag(tagComputed)"
+                @click="removeTagv2(tagComputed)"
               >
                 <svg
                   class="fill-current h-6 w-6 text-blue-500"
@@ -325,12 +324,12 @@ export default {
     categories: [],
     subcategories: [],
     tagsProduct: [],
-    tags: [],
+    tags: [], // todos los tags creados
     tags_id: [],
     img: [],
     files: [],
     featured: 0,
-    imagenes: [],
+    imagenes: [], 
 
 
   }),
@@ -341,6 +340,17 @@ export default {
     product: {
       get() {
         return this.$store.state.product;
+      }
+    },
+    tagsByProduct:{ // Array para contener los tags que tiene el producto
+      get(){
+        return this.$store.state.product.tags
+      },
+      set(value){
+        this.$store.commit("setProperty",{
+          property:"tags",
+          value,
+        })
       }
     },
     images: {
@@ -510,10 +520,13 @@ export default {
       this.tagsProduct = this.tagsProduct.filter((item) => item.id !== tag.id)
       this.tags_id = this.tags_id.filter((item) => item !== tag.id)
     },
-    async initFunctions() {
-      await this.listCategories()
-      // await this.listSubCategories()
-      await this.listTags()
+    removeTagv2(tag){ // Metodo para eliminar tags version 2
+      this.tagsByProduct = this.tagsByProduct?.filter((item) => item.id !== tag.id) // se hace referencia a la propiedad computada
+    },
+    initFunctions() {
+      this.listCategories()
+      this.listSubCategories()
+      this.listTags()
     },
     async listTags() {
       const {data} = await this.$axios.get('/api/v1/tag/')
@@ -559,7 +572,10 @@ export default {
           payload.append('img_id', this.images[0].id)
           payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
-          payload.append('tags', this.product.tags_id)
+          this.tags_id.forEach((element)=>{
+            payload.append('tags', element)
+           })
+           
           if(this.imagenes[0]){
             this.imagenes.forEach((element) => {
             payload.append('images[]', element)
@@ -579,6 +595,7 @@ export default {
           type: 'error',
           text: error?.response?.data?.error ||error,
         })
+        console.log(error)
       }
 
     },

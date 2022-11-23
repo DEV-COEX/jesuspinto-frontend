@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col lg:p-10 md:p-8 sm:p-7 p-4">
-    <form @submit.prevent="updateProduct">
+    <form @submit.prevent="updateProduct" method="POST">
       <section class="block mb-10">
         <div class="flex justify-between items-center">
           <h1 class="text-2xl font-bold">Editar producto</h1>
@@ -242,7 +242,7 @@
                 v-for="data in tags"
                 :key="data.id"
                 :value="data.id"
-                @click="addTag(data)"
+                @click="addTagv2(data)"
               >
                 {{ data.name }}
               </option>
@@ -253,7 +253,7 @@
               class="text-sm font-bold text-gray-600 mt-3"
             >Listado de tags</label
             >
-
+            
             <div
               v-for="tagComputed in tagsByProduct"
               :key="tagComputed.id"
@@ -344,7 +344,7 @@ export default {
     },
     tagsByProduct:{ // Array para contener los tags que tiene el producto
       get(){
-        return this.$store.state.product.tags
+        return this.$store.state.product.tags 
       },
       set(value){
         this.$store.commit("setProperty",{
@@ -508,12 +508,23 @@ export default {
         this.tags_id.push(tag.id)
       }
     },
+    addTagv2(tag){
+      if(this.tagsByProduct?.filter((element) => element.id === tag.id).length > 0){
+        this.$notify({
+              title: 'Tag repetido',
+              type: 'warn',
+              text: 'El tag ya está seleccionado',
+            })
+        return
+      }
+      this.$store.commit('setTag', tag)
+    },
     removeTag(tag) {
       this.tagsProduct = this.tagsProduct.filter((item) => item.id !== tag.id)
       this.tags_id = this.tags_id.filter((item) => item !== tag.id)
     },
     removeTagv2(tag){ // Metodo para eliminar tags version 2
-      this.tagsByProduct = this.tagsByProduct?.filter((item) => item.id !== tag.id) // se hace referencia a la propiedad computada
+      this.tagsByProduct = [...this.tagsByProduct?.filter((item) => item.id !== tag.id)] // se hace referencia a la propiedad computada
     },
     initFunctions() {
       this.listCategories()
@@ -553,6 +564,7 @@ export default {
     },
     async updateProduct() {
       try {
+          
           const payload = new FormData()
           payload.append('name', this.product.name)
           payload.append('serial', this.product.serial)
@@ -564,10 +576,9 @@ export default {
           payload.append('img_id', this.images[0].id)
           payload.append('product_id', this.product.id)
           payload.append('featured', this.product.featured)
-          this.tags_id.forEach((element)=>{
-            payload.append('tags', element)
+          this.tagsByProduct?.forEach((element)=>{
+            payload.append('tags[]', element)
            })
-           
           if(this.imagenes[0]){
             this.imagenes.forEach((element) => {
             payload.append('images[]', element)
@@ -577,8 +588,11 @@ export default {
           method: "post",
           url: `/api/v1/admin/product/${this.product.id}/`,
           data: payload,
+          params:{
+            tags:productTags
+          },
           headers: { "Content-Type": "multipart/form-data" },
-        }).then(() => {
+          }).then(() => {
           this.$router.push('/ecommerce/products')
         })
       } catch (error) {

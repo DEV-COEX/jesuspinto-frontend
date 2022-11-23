@@ -15,6 +15,9 @@ export const mutations = {
       ...state.product,
       [property]: value
     }
+  },
+  setTag(state, value){ // Mutación para añadir un tag nuevo
+    state.product?.tags.push(value)
   }
 }
 

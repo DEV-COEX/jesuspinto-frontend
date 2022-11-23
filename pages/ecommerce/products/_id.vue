@@ -428,7 +428,7 @@ export default {
     await this.$store.dispatch('fetchProducts', this.$route.path)
     this.category = this.product.subcategory.category.id
     this.subcategory = this.product.subcategory.id
-    // this.listSubCategories()
+    await this.listSubCategories()
 
   },
   mounted() {
@@ -477,6 +477,14 @@ export default {
       const files = this.$refs.imagenes.files
       const array = Array.from(files)
       array.forEach((element) => {
+        if(this.imagenes.filter(image => image.name === element.name).length > 0){
+          this.$notify({
+            title: 'Ups!',
+            type: 'warn',
+            text: "item repetido",
+          })
+          return
+        }
         this.imagenes.push(element)
       })
       this.imagenes.forEach((element) => {
@@ -502,10 +510,10 @@ export default {
       this.tagsProduct = this.tagsProduct.filter((item) => item.id !== tag.id)
       this.tags_id = this.tags_id.filter((item) => item !== tag.id)
     },
-    initFunctions() {
-      this.listCategories()
-      this.listSubCategories()
-      this.listTags()
+    async initFunctions() {
+      await this.listCategories()
+      // await this.listSubCategories()
+      await this.listTags()
     },
     async listTags() {
       const {data} = await this.$axios.get('/api/v1/tag/')

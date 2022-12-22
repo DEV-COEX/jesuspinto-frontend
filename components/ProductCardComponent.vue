@@ -43,11 +43,11 @@
           @click="$router.push('/products/' + product.uuid)"></div>
       </div>
       <div class="bg-white w-full h-20 flex rounded-b-lg items-center px-5">
-        <div class="flex flex-col">
+        <div class="flex justify-between w-full">
           <h1 class="font-bold uppercase">
             {{ product.name }}
           </h1>
-          <span>
+          <span class="ml-4">
             {{ price }}
           </span>
         </div>

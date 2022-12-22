@@ -3,7 +3,7 @@
     <LoadingComponent v-if="isLoading" />
     <nav
       v-else
-      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-lg flex items-center md:justify-between h-20 md:px-5"
+      class="bg-[#9B9E0B] md:bg-white md:shadow-md rounded-b-lg md:rounded-b-lg flex items-center md:justify-between h-20 md:px-5"
     >
       <div class="w-1/7 lg:w-auto h-full flex items-center justify-center">
         <div

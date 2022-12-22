@@ -4,101 +4,104 @@
     <Transition name="fade">
       <div
         v-if="isLoading === false"
-        class="flex flex-col items-center lg:px-28 lg:py-10"
+        class="flex flex-col items-center lg:py-10"
       >
-        <div class="w-full px-5">
-          <section id="header-section" class="my-5 rounded">
+        <div class="w-full flex flex-col">
+          <section id="header-section" class="justify-self-start w-full my-5">
             <carousel
+              class="h-[33rem] w-full"
               :pagination-enabled="true"
               :navigation-enabled="false"
               :autoplay="true"
               :autoplay-hover-pause="true"
               :per-page="1"
-              class="h-96 rounded"
             >
               <slide>
-                <img class="w-full object-cover rounded" src="@/static/example/banner.png" alt="Portada">
+                <img class="w-full object-cover" src="@/static/example/banner.png" alt="Portada">
               </slide>
               <slide>
-                <img class="w-full object-cover rounded" src="@/static/example/banner2.png" alt="Portada">
+                <img class="w-full object-cover" src="@/static/example/banner2.png" alt="Portada">
               </slide>
             </carousel>
           </section>
-          <Transition name="fade">
-            <section
-              v-if="latestProducts.length > 0"
-              id="latest-section"
-              class="my-10"
-            >
-              <h1 class="font-bold text-lg">
-                Lo último
-                <nuxt-link
-                  class="font-light text-[#9B9E0B] underline text-xs ml-2"
-                  to="/products"
-                  >Ver más
-                </nuxt-link>
-              </h1>
-              <hr class="w-full my-2 border-gray-400 rounded-full" />
-              <CarouselComponent
-                :navigation-enabled="true"
-                :per-page-custom="[
-                  [1600, 4],
-                  [1200, 3],
-                  [800, 2],
-                  [400, 1],
-                ]"
-                :pagination-enabled="false"
-                :data="latestProducts"
+          <div class="lg:px-28">
+            <Transition name="fade">
+              <section
+                v-if="latestProducts.length > 0"
+                id="latest-section"
+                class="my-10"
               >
-              </CarouselComponent>
-            </section>
-          </Transition>
-          <Transition name="fade">
-            <section
-              v-if="featuredProducts.length === 2"
-              id="featured-section"
-              class="my-10"
-            >
-              <h1 class="font-bold text-lg">Destacados</h1>
-              <hr class="w-full my-2 border-gray-500" />
-              <div class="grid grid-cols-1 md:grid-cols-2">
-                <div class="lg:mr-1 lg:ml-2 m-1">
-                  <FeaturedProductComponent :product="featuredProducts[0]" />
+                <h1 class="font-bold text-lg">
+                  Lo último
+                  <nuxt-link
+                    class="font-light text-[#9B9E0B] underline text-xs ml-2"
+                    to="/products"
+                    >Ver más
+                  </nuxt-link>
+                </h1>
+                <hr class="w-full my-2 border-gray-400 rounded-full" />
+                <CarouselComponent
+                  :navigation-enabled="true"
+                  :per-page-custom="[
+                    [1600, 4],
+                    [1200, 3],
+                    [800, 2],
+                    [400, 1],
+                  ]"
+                  :pagination-enabled="false"
+                  :data="latestProducts"
+                >
+                </CarouselComponent>
+              </section>
+            </Transition>
+            <Transition name="fade">
+              <section
+                v-if="featuredProducts.length === 2"
+                id="featured-section"
+                class="my-10"
+              >
+                <h1 class="font-bold text-lg">Destacados</h1>
+                <hr class="w-full my-2 border-gray-500" />
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                  <div class="lg:mr-1 lg:ml-2 m-1">
+                    <FeaturedProductComponent :product="featuredProducts[0]" />
+                  </div>
+                  <div class="lg:ml-1 lg:mr-2 m-1">
+                    <FeaturedProductComponent :product="featuredProducts[1]" />
+                  </div>
                 </div>
-                <div class="lg:ml-1 lg:mr-2 m-1">
-                  <FeaturedProductComponent :product="featuredProducts[1]" />
-                </div>
-              </div>
-            </section>
-          </Transition>
-          <Transition name="fade">
-            <section
-              v-if="likedProducts.length > 0"
-              id="liked-section"
-              class="my-10"
-            >
-              <h1 class="font-bold text-lg">Tus recomendados</h1>
-              <button
-                type="button"
-                class="font-light text-[#9B9E0B] text-xs ml-2 underline"
+              </section>
+            </Transition>
+            <Transition name="fade">
+              <section
+                v-if="likedProducts.length > 0"
+                id="liked-section"
+                class="my-10"
               >
-                Ver más
-              </button>
-              <hr class="w-full my-2 border-gray-500" />
-              <CarouselComponent
-                :navigation-enabled="true"
-                :per-page-custom="[
-                  [1600, 4],
-                  [1200, 3],
-                  [800, 2],
-                  [400, 1],
-                ]"
-                :pagination-enabled="false"
-                :data="likedProducts"
-              >
-              </CarouselComponent>
-            </section>
-          </Transition>
+                <h1 class="font-bold text-lg">Tus recomendados</h1>
+                <button
+                  type="button"
+                  class="font-light text-[#9B9E0B] text-xs ml-2 underline"
+                >
+                  Ver más
+                </button>
+                <hr class="w-full my-2 border-gray-500" />
+                <CarouselComponent
+                  :navigation-enabled="true"
+                  :per-page-custom="[
+                    [1600, 4],
+                    [1200, 3],
+                    [800, 2],
+                    [400, 1],
+                  ]"
+                  :pagination-enabled="false"
+                  :data="likedProducts"
+                >
+                </CarouselComponent>
+              </section>
+            </Transition>
+          </div>
+          
         </div>
       </div>
     </Transition>
